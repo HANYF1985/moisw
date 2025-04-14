@@ -421,10 +421,40 @@ text-decoration: underline; /* خط تحت النص عند التمرير */
   justify-items: stretch;  /* عرض العناصر بالشكل الطبيعي */
 }
 
+/* استعلامات إعلامية للموبايل */
+@media (max-width: 768px) {
+  .games-container {
+    grid-template-columns: 1fr;  /* عمود واحد على الموبايل */
+    gap: 15px;
+  }
+
+  /* عندما تظهر لعبة واحدة على الموبايل */
+  .games-container.found-1 {
+    grid-template-columns: 1fr;  /* عمود واحد */
+    justify-items: center;  /* توسيط العناصر عموديًا */
+  }
+
+  /* عندما تظهر لعبتان على الموبايل */
+  .games-container.found-2 {
+    grid-template-columns: repeat(2, 1fr);  /* عمودين */
+    justify-items: center;  /* توسيط العناصر عموديًا */
+  }
+
+  /* عندما تظهر أكثر من 3 ألعاب على الموبايل */
+  .games-container.found-3plus {
+    grid-template-columns: repeat(2, 1fr);  /* عمودين على الموبايل */
+    justify-items: stretch;  /* عرض العناصر بالشكل الطبيعي */
+  }
+
+  .game-item {
+    padding: 8px; /* تقليل padding للهواتف لتحسين العرض */
+  }
+}
+
+/* تنسيق عند التمرير على الألعاب */
 a {
   text-decoration: none;
 }
-
 
         
         .news-ticker {
