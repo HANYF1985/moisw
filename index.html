@@ -488,6 +488,49 @@ a {
     font-size: 16px; /* تقليل حجم الخط ليتناسب مع الحجم الصغير */
   }
 }
+@media (max-width: 414px) {
+  .games-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 10px;
+    text-align: center;
+  }
+
+  /* لما يتم العثور على لعبة واحدة */
+  .games-container.found-1 {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  /* لما يتم العثور على لعبتين */
+  .games-container.found-2 {
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+  }
+
+  /* لو أكثر من 3 ألعاب */
+  .games-container.found-3plus {
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: stretch;
+  }
+
+  .game-item {
+    padding: 6px;
+    border-radius: 8px;
+  }
+
+  .game-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .game-name {
+    font-size: 14px;
+    padding: 8px 0;
+  }
+}
 
         
         .news-ticker {
