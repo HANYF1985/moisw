@@ -357,10 +357,13 @@ color: #e03e00; /* تغيير اللون عند التمرير */
 text-decoration: underline; /* خط تحت النص عند التمرير */
 }
 .games-container {
-  border: 2px solid #ffaa33;
-  border-radius: 12px;
-  padding: 10px;
-  margin: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  overflow: visible; /* ✅ مهم جدًا */
+  width: 100%;
+  height: auto;
 }
 
 .games-container {
@@ -400,12 +403,20 @@ text-decoration: underline; /* خط تحت النص عند التمرير */
 a {
             text-decoration: none;
         }
-        .game-item img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
+    
 
+@media (max-width: 768px) {
+  .games-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* صفين عموديين */
+    gap: 15px;
+  }
+
+  .game-item img {
+    width: 100%;
+    height: auto;
+  }
+}
 /* على الموبايل — حجم ثابت */
 @media (max-width: 600px) {
   .game-item img {
