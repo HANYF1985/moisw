@@ -404,42 +404,31 @@ a {
             text-decoration: none;
         }
         @media (max-width: 768px) {
-  .games-container {
+  .games-container.found-1 {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .games-container.found-2 {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .games-container.found-3plus {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
-  }
-
-  .game-item.found {
-    flex: 0 1 auto;
-    width: auto;
-    height: auto;
-  }
-
-  .games-container.found-1 .game-item.found {
-    width: 90%;
-  }
-
-  .games-container.found-2 .game-item.found {
-    width: 45%;
-  }
-
-  .games-container.found-3plus .game-item.found {
-    width: 250px !important;
-    height: 250px !important;
+    gap: 15px;
   }
 
   .games-container.found-3plus .game-item.found img {
-    width: 250px !important;
-    height: 250px !important;
+    width: 300px !important;
+    height: 228.89px !important;
     object-fit: cover;
   }
-}
-        .game-item img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
 }
 
 /* على الموبايل — حجم ثابت */
@@ -1018,18 +1007,28 @@ const messages = [
 
 const tickerContent = document.getElementById('tickerContent');
 
-function updateFoundGames() {
+function searchGames(keyword) {
   const games = document.querySelectorAll('.game-item');
-  const foundGames = document.querySelectorAll('.game-item.found');
   const container = document.querySelector('.games-container');
+  let count = 0;
+
+  games.forEach(game => {
+    const gameName = game.querySelector('.game-name').textContent;
+    if (gameName.toLowerCase().includes(keyword.toLowerCase())) {
+      game.classList.add('found');
+      count++;
+    } else {
+      game.classList.remove('found');
+    }
+  });
 
   container.classList.remove('found-1', 'found-2', 'found-3plus');
 
-  if (foundGames.length === 1) {
+  if (count === 1) {
     container.classList.add('found-1');
-  } else if (foundGames.length === 2) {
+  } else if (count === 2) {
     container.classList.add('found-2');
-  } else if (foundGames.length >= 3) {
+  } else if (count >= 3) {
     container.classList.add('found-3plus');
   }
 }
