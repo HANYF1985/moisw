@@ -930,24 +930,28 @@ function shuffleArray(array) {
         }
         return newArray;
     }
-const searchInput = document.getElementById('searchInput');
-const gamesContainer = document.querySelector('.games-container');
+function searchGame() {
+  var input = document.getElementById("searchInput").value.toLowerCase();
+  var games = document.querySelectorAll(".game-item");
 
-searchInput.addEventListener('input', function() {
-  // التمرير التلقائي إلى محتوى الألعاب
-  gamesContainer.scrollIntoView({ behavior: 'smooth' });
+  let found = false;
 
-  const searchValue = this.value.toLowerCase();
-
-  gameItems.forEach(item => {
-    const title = item.querySelector('.game-name').textContent.toLowerCase();
-    if (title.includes(searchValue)) {
-      item.style.display = 'block';
+  games.forEach(game => {
+    let gameName = game.textContent.toLowerCase();
+    if (gameName.includes(input) && input !== "") {
+      game.scrollIntoView({ behavior: "smooth", block: "center" });
+      game.style.boxShadow = "0 0 20px 5px #ffaa33";
+      found = true;
     } else {
-      item.style.display = 'none';
+      game.style.boxShadow = "none";
     }
   });
-});
+
+  if (!found && input !== "") {
+    alert("❌ اللعبة غير موجودة.");
+  }
+}
+
 const messages = [
   "🎮 God of War Ragnarök متوفرة الآن!",
   "🔥 Uncharted 4 A Thief's End متاحة للتنزيل!",
