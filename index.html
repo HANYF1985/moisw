@@ -392,6 +392,22 @@ text-decoration: underline; /* خط تحت النص عند التمرير */
 a {
             text-decoration: none;
         }
+        .game-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* على الموبايل — حجم ثابت */
+@media (max-width: 600px) {
+  .game-item img {
+    width: 300px;
+    height: 228.89px;
+    object-fit: cover;
+    margin: 0 auto;
+  }
+}
+
 @media (max-width: 768px) {
     .games-container {
         grid-template-columns: repeat(2, 1fr); /* 2 أعمدة على الشاشات الصغيرة */
