@@ -455,6 +455,39 @@ text-decoration: underline; /* خط تحت النص عند التمرير */
 a {
   text-decoration: none;
 }
+/* استعلامات إعلامية للموبايل لأجهزة بحجم شاشة أقل من 500px */
+@media (max-width: 500px) {
+  .games-container {
+    grid-template-columns: 1fr;  /* عمود واحد على الشاشات الصغيرة */
+    gap: 12px;  /* تقليل المسافة بين الألعاب */
+  }
+
+  /* عندما تظهر لعبة واحدة على الشاشات الصغيرة */
+  .games-container.found-1 {
+    grid-template-columns: 1fr;  /* عمود واحد */
+    justify-items: center;  /* توسيط العناصر عموديًا */
+  }
+
+  /* عندما تظهر لعبتان على الشاشات الصغيرة */
+  .games-container.found-2 {
+    grid-template-columns: repeat(2, 1fr);  /* عمودين */
+    justify-items: center;  /* توسيط العناصر عموديًا */
+  }
+
+  /* عندما تظهر أكثر من 3 ألعاب على الشاشات الصغيرة */
+  .games-container.found-3plus {
+    grid-template-columns: repeat(2, 1fr);  /* عمودين */
+    justify-items: stretch;  /* عرض العناصر بالشكل الطبيعي */
+  }
+
+  .game-item {
+    padding: 6px; /* تقليل padding لتحسين العرض على الشاشات الصغيرة */
+  }
+
+  .game-name {
+    font-size: 16px; /* تقليل حجم الخط ليتناسب مع الحجم الصغير */
+  }
+}
 
         
         .news-ticker {
