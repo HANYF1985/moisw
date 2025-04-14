@@ -357,12 +357,12 @@ color: #e03e00; /* تغيير اللون عند التمرير */
 text-decoration: underline; /* خط تحت النص عند التمرير */
 }
 .games-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: space-between;
-  overflow: visible; /* ✅ مهم جدًا */
-  width: 100%;
+  border: 2px solid #ffaa33;
+  border-radius: 12px;
+  padding: 10px;
+  margin: 20px;
+  overflow: visible;
+  max-height: none;
   height: auto;
 }
 
@@ -403,20 +403,45 @@ text-decoration: underline; /* خط تحت النص عند التمرير */
 a {
             text-decoration: none;
         }
-    
-
-@media (max-width: 768px) {
+        @media (max-width: 768px) {
   .games-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* صفين عموديين */
-    gap: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
   }
 
-  .game-item img {
-    width: 100%;
+  .game-item.found {
+    flex: 0 1 auto;
+    width: auto;
     height: auto;
   }
+
+  .games-container.found-1 .game-item.found {
+    width: 90%;
+  }
+
+  .games-container.found-2 .game-item.found {
+    width: 45%;
+  }
+
+  .games-container.found-3plus .game-item.found {
+    width: 300px;
+    height: 228.89px;
+  }
+
+  .games-container.found-3plus .game-item.found img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
+        .game-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
 /* على الموبايل — حجم ثابت */
 @media (max-width: 600px) {
   .game-item img {
@@ -766,6 +791,11 @@ a {
             </a>
         </div>
     </div>
+    <div class="search-results-container" id="searchResults" style="display:none;">
+        <h3 style="color:#ffaa33; margin:10px 0;">نتائج البحث</h3>
+        <div class="games-container" id="resultsContainer"></div>
+        <button onclick="resetSearch()" class="copy-btn">عرض جميع الألعاب</button>
+      </div>
     <div id="pagination"></div>
 
 </footer>
@@ -884,27 +914,21 @@ a {
             searchBox.classList.toggle('show');
         });
 
-        function searchGame() {
-  var input = document.getElementById("searchInput").value.toLowerCase();
-  var games = document.querySelectorAll(".game-item");
-
-  let found = false;
+        function searchGames(keyword) {
+  const games = document.querySelectorAll('.game-item');
 
   games.forEach(game => {
-    let gameName = game.textContent.toLowerCase();
-    if (gameName.includes(input) && input !== "") {
-      game.scrollIntoView({ behavior: "smooth", block: "center" });
-      game.style.boxShadow = "0 0 20px 5px #ffaa33";
-      found = true;
+    const gameName = game.querySelector('.game-name').textContent;
+    if (gameName.includes(keyword)) {
+      game.classList.add('found');
     } else {
-      game.style.boxShadow = "none";
+      game.classList.remove('found');
     }
   });
 
-  if (!found && input !== "") {
-    alert("❌ اللعبة غير موجودة.");
-  }
+  updateFoundGames();
 }
+
 
 
         menuToggle.addEventListener('click', function() {
@@ -994,7 +1018,22 @@ const messages = [
 
 const tickerContent = document.getElementById('tickerContent');
 
- 
+function updateFoundGames() {
+  const games = document.querySelectorAll('.game-item');
+  const foundGames = document.querySelectorAll('.game-item.found');
+  const container = document.querySelector('.games-container');
+
+  container.classList.remove('found-1', 'found-2', 'found-3plus');
+
+  if (foundGames.length === 1) {
+    container.classList.add('found-1');
+  } else if (foundGames.length === 2) {
+    container.classList.add('found-2');
+  } else if (foundGames.length >= 3) {
+    container.classList.add('found-3plus');
+  }
+}
+
 
 
     </script>
