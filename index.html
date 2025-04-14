@@ -13,8 +13,10 @@
     <meta property="og:image" content="https://postimg.cc/PpFCYZ0V">
     <meta property="og:url" content="https://hanyf1985.github.io/PS4GAMEARABIC/">
     <link rel="canonical" href="https://hanyf1985.github.io/PS4GAMEARABIC/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     <style>
         body {
@@ -25,8 +27,6 @@
             padding: 0;
             text-align: center;
         }
-
-      
         .header {
             position: fixed;
             top: 0;
@@ -88,13 +88,7 @@
                 z-index: 1000;
                 position: absolute;
                 left: 0;
-            }
-
-            .search-container {
-                position: relative;
-                display: flex;
-                align-items: center;
-                margin-left: 60px;
+                
             }
         }
 
@@ -121,7 +115,7 @@
         }
 
         .navbar a:hover {
-            background-color: #ff4500;
+            background-color: #e68900;
             color: #fff;
         }
 
@@ -132,7 +126,7 @@
         .dropdown-menu {
             display: none;
             position: absolute;
-            background-color: #333;
+            background-color: #0e1329;
             top: 100%;
             right: 0;
             min-width: 150px;
@@ -155,184 +149,365 @@
         .dropdown:hover .dropdown-menu {
             display: block;
         }
-
-        .search-container {
-            position: relative;
-            display: flex;
-            align-items: center;
-            margin-left: 20px;
-        }
-
-        .search-icon {
-            font-size: 20px;
-            color: white;
-            cursor: pointer;
-            padding: 5px;
-        }
-
-        .search-box {
-            position: absolute;
-            left: calc(100% + 10px);
-            top: 50%;
-            transform: translateY(-50%);
-            padding: 8px 12px;
-            border-radius: 5px;
-            border: none;
-            font-size: 14px;
-            width: 100px;
-            background-color: #fff;
-            color: #000;
-            display: none;
-            z-index: 1001;
-            box-shadow: 0 0 10px rgba(0,0,0,0.2);
-        }
-
-        .search-box.show {
-            display: block;
-        }
-
-        .slider-wrapper {
-            position: relative;
-            max-width: 100%;
-            margin: 40px auto;
-            border-radius: 15px;
-            overflow: hidden;
-        }
-
-        .hero-slider img {
-            width: 100%;
-            border-radius: 15px;
-            height: auto;
-            display: block;
-        }
-
-        .latest-games-slider {
-            position: absolute;
-            bottom: 20px;
-            right: 0;
-            left: 0;
-            overflow: hidden;
-            padding: 10px 20px;
-            background: rgba(28, 28, 46, 0);
-            border-radius: 15px;
-            backdrop-filter: blur(0px);
-            max-width: 95%;
-            margin: 0 auto;
-            mask-image: linear-gradient(to right, transparent, #000 10% 90%, transparent);
-            display: block;
-        }
-        .latest-games-slider.list {
-            width: 200px;
-    height: 200px;
-    position: absolute;
-    left: 100%;
-    animation: autoRun 10s linear infinite;
-    transition: filter 0.5s;
-    animation-delay: calc((10s / 9) * (var(--position) - 1) - 10s) !important;
+        .social-links {
+  display: flex;
+  gap: 10px;
+  transform: translateX(20px); /* تحريك لليسار بـ 5 بكسل */
 }
-        .latest-games-slider .swiper-slide {
-            background-color: #2a2a3d00;
-    padding: 10px;
-    border-radius: 10px;
+        .social-icon {
+            width: 30px;
+            height: 30px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .social-icon:hover {
+            transform: scale(1.1);
+            opacity: 0.9;
+        }
+        .special-announcement {
+  background-color: #0e1329;
+  color: #fff;
+  padding: 12px 0;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  white-space: nowrap;
+  font-size: 16px;
+  z-index: 9999;
+  border-top: 2px solid #ff6600;   /* ✅ الحد من الأعلى */
+  border-bottom: 2px solid #ff6600;
+  margin-top: 80px; /* نزول بسيط */
+}
+
+.announcement-content {
+  display: inline-block;
+  padding-left: 100%;
+  animation: announcementScroll 30s linear infinite;
+}
+
+@keyframes announcementScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+        /* تصميم السلايدر */
+    .slider {
+      width: 750px;
+      max-width: 1000px;
+      height: 450px;
+      overflow: hidden;
+      position: relative;
+      margin: 20px auto;
+      border-radius: 15px;
+      box-shadow: 0px 0px 10px 2px #ff4500;
+      margin-top: 20px; /* نزول بسيط */
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slide {
+      min-width: 100%;
+      height: auto;
+      box-sizing: border-box;
+    }
+
+    .slider img {
+      width: 750px;
+      height: 450px;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+
+    
+    .icon-overlay::before {
+  content: ""; /* نستخدم هذا لإضافة محتوى */
+  position: absolute;
+  top: 10px; /* المسافة من الأعلى */
+  right: 10px; /* المسافة من اليمين */
+  width: 200px; /* عرض الأيقونة */
+  height: 50px; /* ارتفاع الأيقونة */
+  background-image: url('https://i.postimg.cc/YS23t6RD/PS4-GAMEARABIC-2-22-2025-4.png'); /* مسار الأيقونة */
+  background-size: contain; /* لضبط الأيقونة بما يتناسب مع المساحة */
+  background-repeat: no-repeat; /* منع التكرار */
+  z-index: 10; /* لضمان ظهور الأيقونة فوق الصورة */
+  border: 2px solid white; /* حدود بيضاء حول الأيقونة لتمييزها */
+  border-radius: 5px; /* حواف دائرية إذا كنت تفضل الشكل */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* الظل لتوضيح الأيقونة */
+}
+    /* تصميم الجدول */
+   
+  .game-info-table {
+    width: 85%;
+    max-width: 600px;
+    margin: 30px auto;
+    border-collapse: collapse;
+    background-color: #25253b;
+    color: #ffffff;
+    direction: rtl;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  }
+
+  .game-info-table thead tr {
+    border-bottom: 1px solid #ff6600;
+  }
+
+  .game-info-table th, .game-info-table td {
+    padding: 14px 20px;
+    text-align: right;
+    font-size: 16px;
+    border-bottom: 1px solid #333;
+  }
+
+  .game-info-table th {
+    background-color: #2f2f4a;
+    color: #ff8c00;
+    width: 55%;
+    font-weight: bold;
+  }
+
+  .game-info-table td {
+    background-color: #24243a;
+    color: #e0e0e0;
+  }
+
+  .game-info-table tr:last-child th, 
+  .game-info-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .game-info-title {
+    font-size: 22px;
+    color: #ff8c00;
     text-align: center;
-    color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0);
-}
-        .latest-games-slider:hover .item {
-    animation-play-state: paused !important;
-    filter: grayscale(1);
+    margin: 20px 0;
+    font-weight: bold;
+    border-bottom: 3px solid #ff8c00;
+    padding-bottom: 8px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  table {
+      direction: ltr !important;
     }
-.latest-games-slider .item:hover {
-    filter: grayscale(0);
-}
-
-.fade-in {
-    animation: fadeIn 1s ease-in-out;
-}
-
-
- /* Adding the custom animation for the latest games slider */
-@keyframes autoRun {
-    0% {
-        transform: translateX(100%);
+    @media (max-width: 768px) {
+      .slider {
+        height: 250px;
+      }
+      table {
+        width: 100%;
+      }
     }
-    100% {
-        transform: translateX(-100%);
-    }
-}
-
-.latest-games-slider .swiper-wrapper {
+    .game-links {
     display: flex;
-    animation: autoRun 08s linear infinite; /* 10s is the duration for one loop, adjust as needed */
-}
-.latest-games-slider img {
-    width: 100%;
-    height: 100%;
+    flex-direction: column;
+    gap: 12px;
+    width: 85%;
+    max-width: 600px;
+    margin: 30px auto;
+    direction: rtl;
+  }
+
+  .game-link-item {
+    background-color: #25253b;
+    border: 1px solid #333;
+    border-right: 5px solid #ff6600;
+    padding: 14px 18px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #e0e0e0;
+    transition: background-color 0.3s;
+  }
+
+  .game-link-item:hover {
+    background-color: #2f2f4a;
+  }
+
+  .game-link-item a {
+    color: #ff8c00;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+
+  .game-link-item a:hover {
+    color: #ffaa33;
+  }
+  .password-box {
+    background: linear-gradient(135deg, #1c1c2e, #25253b);
+    border: 2px solid #ff6600;
+    padding: 1px 10px;
     border-radius: 10px;
-}
-/* عند توقف مرور الفأرة على السلايدر، تتحول جميع الصور إلى اللون الرمادي */
-.latest-games-slider:hover .swiper-slide img {
-    filter: grayscale(100%) !important; /* تحويل الصور إلى اللون الرمادي */
-}
-
-/* عندما يكون الفأرة على صورة معينة، يتم إلغاء تأثير الـ grayscale (إبقاء الصورة ملونة) */
-.latest-games-slider .swiper-slide:hover img {
-    filter: grayscale(0%) !important; /* إبقاء الصورة ملونة */
-    transform: scale(1.05); /* تكبير الصورة قليلاً عند المرور عليها */
-}
-
-/* تأثير الانتقال لإعطاء سلاسة عند التغيير بين الرمادي والملون */
-.latest-games-slider .swiper-slide img {
-    transition: filter 0.3s ease, transform 0.3s ease;
-}
-
-/* عند مرور الفأرة على السلايدر يتوقف الحركة */
-.latest-games-slider:hover .swiper-wrapper {
-    animation-play-state: paused; /* إيقاف الأنيميشن */
-}
-
-.back-to-top {
-position: fixed;
-bottom: 20px;
-right: 20px;
-width: 50px;
-height: 50px;
-background-color: #007bff;
-color: white;
-border: none;
-border-radius: 50%;
-font-size: 20px;
-cursor: pointer;
-display: none; /* مخفي افتراضياً */
-align-items: center;
-justify-content: center;
-transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.back-to-top:hover {
-background-color: #0056b3;
-transform: scale(1.1);
-}
-
-  .pagination {
-    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    margin: 30px auto;
+    width: 30%;
+    max-width: 600px;
+    direction: rtl;
+    box-shadow: 0 0 20px #ff6600a0;
+    position: relative;
+    overflow: hidden;
   }
-  .pagination button {
-    margin: 5px;
-      padding: 10px;
-      border: none;
-      background-color: gray;
+
+  .password-text {
+    font-weight: bold;
+    font-size: 18px;
+    background: linear-gradient(90deg, #ff6600, #ffaa33, #ff6600);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 2s linear infinite;
+  }
+
+  .copy-btn {
+    background: #ff6600;
+    color: #fff;
+    border: none;
+    padding: 3px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: bold;
+    box-shadow: 0 0 10px #ff6600aa;
+  }
+
+  .copy-btn:hover {
+    background: #ffaa33;
+    box-shadow: 0 0 20px #ffaa33cc;
+  }
+
+  @keyframes shine {
+    0% { background-position: 0%; }
+    100% { background-position: 200%; }
+  }
+   /* زر الانتقال إلى الفيديو */
+   .scroll-to-video {
+      font-size: 14px; /* تقليص الحجم */
+      background-color: #ff4500;
       color: white;
-      cursor: pointer;
-  }
-  .pagination button.active {
-      background-color: #e68900;
-  }
-  .footer {
+      padding: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 5px;
+      margin-top: 10px;
+      display: inline-block;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+    .scroll-to-video:hover {
+      background-color: #0e1329;
+      transform: scale(1.05);
+    }
+/* وصف اللعبة */
+.description-container {
+      max-width: 900px;
+      margin: 30px auto;
+      background-color: #181829;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px 2px #ff4500;
+      text-align: justify;
+      direction: rtl; /* جعل النص من اليمين إلى اليسار */
+    }
+    .description p {
+      margin: 15px 0;
+      line-height: 1.6;
+      font-size: 16px;
+    }
+  /* مراجعات المستخدمين */
+  .user-reviews {
+      max-width: 900px;
+      margin: 30px auto;
+      background-color: #181829;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px 2px #ff4500;
+      text-align: center; /* جعل المراجعات في الوسط */
+    }
+    .user-reviews h2 {
+      font-size: 20px;
+      color: #ff4500;
+      margin-bottom: 15px;
+    }
+    .user-reviews p {
+      font-size: 16px;
+      margin: 5px 0;
+    }
+    .video-container {
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        iframe {
+            width: 80%;
+            max-width: 560px;
+            height: 315px;
+            border: none;
+        }
+        .scroll-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+        .scroll-button:hover {
+            background-color: #0056b3;
+        }
+  /* حركة السهم */
+  @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0);
+        }
+        40% {
+            transform: translateY(-10px); /* ارتفاع السهم */
+        }
+        60% {
+            transform: translateY(-5px); /* ارتفاع أقل للسهم */
+        }
+    }
+
+    /* نص التوجيه */
+    .download-arrow p {
+        font-size: 25px;
+        margin-top: 5px; /* مسافة بين السهم والنص */
+        color: #fc0606; /* لون النص */
+    }
+  /* سهم التحميل */
+  .download-arrow {
+        position: relative;
+        text-align: center;
+        margin-top: 10px; /* مسافة بين الفيديو والسهم */
+    }
+
+    .arrow {
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-top: 20px solid #ff0000; /* لون السهم */
+        margin: 0 auto; /* مركز السهم */
+        animation: bounce 1s infinite; /* الحركة */
+    }
+ 
+    .footer {
 background-color: #0e1329; /* خلفية داكنة */
 padding: 3px;
 text-align: center;
 text-decoration: none;
+text-decoration: none; /* إزالة الخط السفلي */
+
 }
 
 .footer-links a {
@@ -341,6 +516,7 @@ font-size: 18px; /* حجم الخط */
 font-weight: bold; /* جعل النص عريض */
 text-decoration: none; /* إزالة الخط السفلي */
 margin: 0 10px; /* تباعد بين الروابط */
+transition: color 0.3s ease; /* تأثير انتقال اللون */
 }
 
 .footer-links a:hover {
@@ -348,365 +524,400 @@ color: #e03e00; /* تغيير اللون عند التمرير */
 text-decoration: underline; /* خط تحت النص عند التمرير */
 }
 
-.games-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 أعمدة */
-    gap: 20px; /* المسافة بين الألعاب */
-    padding: 20px;
-    text-align: center;
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    display: none; /* مخفي افتراضياً */
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.game-item {
-    background-color: #2b2b3d;
-    padding: 10px;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0px 0px 6px 7px rgba(0, 0, 0, 0.3);
-    border-width: 10px 10px 30px 10px;
-    transition: transform 0.9s ease, box-shadow 0.9s ease; /* تأثير الحركة وظل العنصر */
+.back-to-top:hover {
+    background-color: #0056b3;
+    transform: scale(1.1);
 }
-.game-item:hover {
-            box-shadow:0px 0px 14px 12px rgba(255, 89, 0, 0.512);  /* ظل أصفر عند مرور الفأرة */
-        }
-.game-item img {
-    width: 100%;
-    height: auto;
+.icon-overlay::before {
+  content: ""; /* نستخدم هذا لإضافة محتوى */
+  position: absolute;
+  top: 10px; /* المسافة من الأعلى */
+  right: 10px; /* المسافة من اليمين */
+  width: 200px; /* عرض الأيقونة */
+  height: 50px; /* ارتفاع الأيقونة */
+  background-image: url('https://i.postimg.cc/YS23t6RD/PS4-GAMEARABIC-2-22-2025-4.png'); /* مسار الأيقونة */
+  background-size: contain; /* لضبط الأيقونة بما يتناسب مع المساحة */
+  background-repeat: no-repeat; /* منع التكرار */
+  z-index: 10; /* لضمان ظهور الأيقونة فوق الصورة */
+  border: 2px solid white; /* حدود بيضاء حول الأيقونة لتمييزها */
+  border-radius: 5px; /* حواف دائرية إذا كنت تفضل الشكل */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* الظل لتوضيح الأيقونة */
 }
-
-.game-name {
-    padding: 10px;
-    font-size: 18px;
-    color: #fff;
-    background-color: #161526;
-    text-align: center;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-}
-a {
-            text-decoration: none;
-        }
-@media (max-width: 768px) {
-    .games-container {
-        grid-template-columns: repeat(2, 1fr); /* 2 أعمدة على الشاشات الصغيرة */
-    }
-}
-@media (max-width: 480px) {
-  .games-container {
-    grid-template-columns: repeat(1, 1fr); /* عمود واحد على الشاشات الصغيرة جداً */
-  }
-.games-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* تجعل العناصر تتكيف */
-  gap: 8px; /* إضافة مسافة بين الألعاب */
-}
-  
-}
-a {
-            text-decoration: none;
-        }
-        
-        
     </style>
 </head>
 <body>
     <header class="header">
-        <div class="logo">
-            <img src="assets/logo.png" alt="PS4 Logo">
+        <div class="logo"onclick="location.href=('index.html')">
+            <img src="https://i.postimg.cc/nVT4nwCv/logo.png" alt="PS4 Logo"> </div>
+            <nav class="navbar">
+                <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+                <div class="dropdown">
+                    <a href="ps4arabic.html"> PS4Arabic</a>
+                </div>
+                <div class="dropdown">
+                    <a href="#"> PS5</a>
+                    <div class="dropdown-menu"><a href="#">PS5-Arabic</a></div>
+                </div>
+                <div class="dropdown">
+                    <a href="#"> THEMES</a>
+                    <div class="dropdown-menu"><a href="#">PS4</a><a href="#">PS5</a></div>
+                </div>
+                <div class="dropdown">
+                    <a href="#"> MOD</a>
+                    <div class="dropdown-menu"><a href="#">MOD GTA V</a><a href="#">MOD RDR 2</a></div>
+                </div>
+                <div class="dropdown"><a href="#"> APP.PKG</a></div>
+            </nav>
         </div>
-        <nav class="navbar">
-            <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
-            <div class="dropdown">
-                <a href="ps4arabic.html"> PS4Arabic</a>
-            </div>
-            <div class="dropdown">
-                <a href="#"> PS5</a>
-                <div class="dropdown-menu"><a href="#">PS5-Arabic</a></div>
-            </div>
-            <div class="dropdown">
-                <a href="#"> THEMES</a>
-                <div class="dropdown-menu"><a href="#">PS4</a><a href="#">PS5</a></div>
-            </div>
-            <div class="dropdown">
-                <a href="#"> MOD</a>
-                <div class="dropdown-menu"><a href="#">MOD GTA V</a><a href="#">MOD RDR 2</a></div>
-            </div>
-            <div class="dropdown"><a href="#"> APP.PKG</a></div>
-        </nav>
-
-        <button class="menu-toggle"><i class="fas fa-bars"></i></button>
-
-        <div class="header-controls">
-            <div class="search-container">
-                <i class="fas fa-search search-icon"></i>
-                <input type="text" id="searchBox" placeholder="بحث..." class="search-box hidden">
+            <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+        </div>
+        <div class="social-links">
+            <a href="https://web.facebook.com/share/v/1BRSsTQf57/" target="_blank">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1024px-Facebook_f_logo_%282019%29.svg.png" alt="Facebook" class="social-icon">
+            </a>
+            <a href="https://www.youtube.com/@mustafahanyf" target="_blank" style="margin: 0 10px;">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" class="social-icon">
+            </a>
+            <a href="https://t.me/GOLDHEN198" target="_blank">
+              <img src="https://img.icons8.com/?size=100&id=k4jADXhS5U1t&format=png&color=000000" alt="Telegram" class="social-icon">
+            </a>
             </div>
         </div>
     </header>
+</div>
+    <div class="special-announcement">
+        <div class="announcement-content">
+          عزيزي الزائر ✨ لتجربة أفضل وأسرع، قم بتحميل الألعاب من روابط <strong>4GAMER</strong> المتوفرة حالياً على الموقع ✅ وسيتم تحديث باقي الروابط قريباً عبر <strong>4GAMER</strong> أيضًا!
+        </div>
+      </div>
+      <div class="slider">
+        <div class="slides" id="slider">
+          <div class="slide">
+           <img src="https://www.babup.com/do.php?img=95083" alt="لعبة 2">  
+          </div>
+          <div class="slide">
+           <img src="https://www.babup.com/do.php?img=95085" alt="لعبة 2">  
+          </div>
+          <div class="slide">
+           <img src="https://www.babup.com/do.php?img=95084" alt="لعبة 2">  
+          </div>
+          <div class="slide">
+             <img src="https://immagini.trovaprezzi.it/galleria-varianti/assassin_s_creed_unity_ps4/637902076179695022.jpg" alt="لعبة 2">  
+           </div>
+           <div class="slide">
+             <img src="https://staticctf.ubisoft.com/J3yJr34U2pZ2Ieem48Dwy9uqj5PNUQTn/xAgERoN33SYzSIi4YGOSy/7e39368e53fe9a5b0b3f804cf858a4fc/acu-ubicom-keyart-thumbnail.jpg" alt="لعبة 2">  
+           </div>
+           <div class="slide">
+             <img src="https://staticctf.ubisoft.com/J3yJr34U2pZ2Ieem48Dwy9uqj5PNUQTn/48AYcjAmxhNje1YIZAzMY0/29298633db370d1b5d4fd86aae003d24/acu-ubicom-game_info-03-discover_paris.jpg" alt="لعبة 2">  
+           </div>
+           <div class="slide">
+             <img src="https://img.redbull.com/images/c_fill,g_auto,w_1200,h_630/f_auto,q_auto/redbullcom/2014/10/06/1331682983738_2/assassin-s-creed-unity" alt="لعبة 2">  
+         </div>
+         <div class="slide">
+             <img src="https://www.gamalive.com/images/screen/29888-assassin-s-creed-unity.jpg" alt="لعبة 2">  
+         </div>
+       </div>
+       </div>
+     </div>
+       <!-- عنوان اللعبة -->
+       <div class="game-info-title">معلومات اللعبة</div>
 
-    <!-- السلايدر الكبير مع شريط الألعاب -->
-    <div class="slider-wrapper">
-        <div class="swiper hero-slider">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide"><a href="https://example.com/game1" target="_blank"><img src="https://a.top4top.io/p_3195zke7i2.jpg" alt="صورة 1"></a></div>
-                <div class="swiper-slide"><a href="https://example.com/game2" target="_blank"><img src="https://p4.wallpaperbetter.com/wallpaper/320/998/398/nathan-drake-uncharted-4-a-thiefs-end-best-games-of-2016-wallpaper-preview.jpg" alt="صورة 2"></a></div>
-                <div class="swiper-slide"><a href="https://example.com/game3" target="_blank"><img src="https://i.postimg.cc/nrd071xM/The-Last-of-Us-2.webp" alt="صورة 3"></a></div>
-                <div class="swiper-slide"><a href="https://example.com/game4" target="_blank"><img src="https://i.postimg.cc/Hsx0vDqM/The-Shadow-of-the-Tomb-Raider-6.webp" alt="صورة 4"></a></div>
-                <div class="swiper-slide"><a href="https://example.com/game5" target="_blank"><img src="https://i.postimg.cc/MGw68WB6/Call-of-Duty-Black-Ops-6-2.jpg" alt="صورة 5"></a></div>
-                <div class="swiper-slide"><a href="https://example.com/game6" target="_blank"><img src="https://i.blogs.es/0909e3/22d5eb03beb6c11b403050ac006039aa/1366_2000.jpeg" alt="صورة 6"></a></div>
-            </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-
-            <!-- سلايدر أحدث الألعاب -->
-            <div class="swiper latest-games-slider">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <a href="https://example.com/gow4" target="_blank">
-                            <img src="assets/godofwar4.jpg" alt="لعبة 1">
-                        </a>
-                    </div>
-                    <div class="swiper-slide">
-                        <a href="https://example.com/tlou2" target="_blank">
-                            <img src="assets/tlou2.jpg" alt="لعبة 2">
-                        </a>
-                    </div>
-                    <div class="swiper-slide">
-                        <a href="https://example.com/gowragnarok" target="_blank">
-                            <img src="assets/gowragnarok.jpg" alt="لعبة 3">
-                        </a>
-                    </div>
-                </div>
-            </div>
+       <table class="game-info-table">
+         <thead>
+           <tr>
+             <th>CUSA00605</th>
+             <td>كود اللعبة</td>
+           </tr>
+           <tr>
+             <th>دبلجة / القوائم / الحوارات</th>
+             <td>اللغة العربية</td>
+           </tr>
+           <tr>
+             <th>أكشن، مغامرات، عالم مفتوح</th>
+             <td>النوع</td>
+           </tr>
+           <tr>
+             <th>2014</th>
+             <td>سنة النشر</td>
+           </tr>
+           <tr>
+             <th>35 GB</th>
+             <td>حجم اللعبة</td>
+           </tr>
+           <tr>
+             <th>12 GB</th>
+             <td>حجم التحديث</td>
+           </tr>
+           <tr>
+             <th>1.05</th>
+             <td>رقم التحديث</td>
+           </tr>
+           <tr>
+             <th>Playable 5.05, 6.xx, 7.xx, 9.00</th>
+             <td>النسخ القابلة للتشغيل</td>
+           </tr>
+           <tr>
+             <th>18+</th>
+             <td>التصنيف العمري</td>
+           </tr>
+         </thead>
+       </table>
+       <div class="game-links">
+        <div class="game-link-item">
+          <span>God of War Ragnarök</span>
+          <a href="https://example.com/game1" target="_blank">رابط التحميل</a>
         </div>
-    </div>
-    <div class="games-container">
-        <!-- لعبة 1 -->
-        <div class="game-item">
-            <a href="https://example.com/game1" target="_blank">
-                <img src="https://a.top4top.io/p_3195zke7i2.jpg" alt="لعبة 1">
-                <div class="game-name">لعبة 1</div>
-            </a>
+        <div class="game-link-item">
+          <span>Uncharted 4: A Thief's End</span>
+          <a href="https://example.com/game2" target="_blank">رابط التحميل</a>
         </div>
-        <!-- لعبة 2 -->
-        <div class="game-item">
-            <a href="https://example.com/game2" target="_blank">
-                <img src="https://p4.wallpaperbetter.com/wallpaper/320/998/398/nathan-drake-uncharted-4-a-thiefs-end-best-games-of-2016-wallpaper-preview.jpg" alt="لعبة 2">
-                <div class="game-name">لعبة 2</div>
-            </a>
+        <div class="game-link-item">
+          <span>The Last of Us Part II</span>
+          <a href="https://example.com/game3" target="_blank">رابط التحميل</a>
         </div>
-        <!-- لعبة 3 -->
-        <div class="game-item">
-            <a href="https://example.com/game3" target="_blank">
-                <img src="https://i.postimg.cc/nrd071xM/The-Last-of-Us-2.webp" alt="لعبة 3">
-                <div class="game-name">لعبة 3</div>
-            </a>
+        <div class="game-link-item">
+          <span>Shadow of the Tomb Raider</span>
+          <a href="https://example.com/game4" target="_blank">رابط التحميل</a>
         </div>
-        <!-- لعبة 4 -->
-        <div class="game-item">
-            <a href="https://example.com/game4" target="_blank">
-                <img src="https://i.postimg.cc/Hsx0vDqM/The-Shadow-of-the-Tomb-Raider-6.webp" alt="لعبة 4">
-                <div class="game-name">لعبة 4</div>
-            </a>
-        </div>
-        <!-- لعبة 5 -->
-        <div class="game-item">
-            <a href="https://example.com/game5" target="_blank">
-                <img src="https://i.postimg.cc/MGw68WB6/Call-of-Duty-Black-Ops-6-2.jpg" alt="لعبة 5">
-                <div class="game-name">لعبة 5</div>
-            </a>
-        </div>
-        <!-- لعبة 6 -->
-        <div class="game-item">
-            <a href="https://example.com/game6" target="_blank">
-                <img src="https://i.blogs.es/0909e3/22d5eb03beb6c11b403050ac006039aa/1366_2000.jpeg" alt="لعبة 6">
-                <div class="game-name">لعبة 6</div>
-            </a>
-        </div>
-    </div>
-    <div id="pagination"></div>
-
-</footer>
-<footer class="footer">
-<div style="text-align: center; margin-top: 20px;">
-<a href="https://web.facebook.com/share/v/1BRSsTQf57/" target="_blank">
-    <img src="https://img.icons8.com/?size=100&id=uLWV5A9vXIPu&format=png&color=000000" alt="Facebook" width="40">
-
-<a href="https://www.youtube.com/@mustafahanyf" target="_blank" style="margin: 0 10px;">
-    <img src="https://img.icons8.com/?size=100&id=19318&format=png&color=000000" alt="YouTube" width="40">
-
-<a href="https://t.me/GOLDHEN198" target="_blank">
-    <img src="https://img.icons8.com/?size=100&id=oWiuH0jFiU0R&format=png&color=000000" alt="Telegram" width="40">
-</div>
-</div>
-</div>
-<footer class="footer">
-<div class="footer-links">
-    <a href="terms.html">اتفاقية الاستخدام</a>
-    <a href="privacy.html">سياسة الخصوصية</a>
-    <a href="about.html">من نحن</a>
-    <a href="contact.html">اتصل بنا</a>
-</div>
-</div>
-</footer>
-<footer class="footer">
-<div className="text-sm">Copyright &copy; 2025 | by Hanyf Mustafa</div>
-</div>
-<button id="backToTop" class="back-to-top">🔝</button>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  
+      </div>
+      <div class="password-box">
+        <span class="password-text">🔒 كلمة السر: 4GAMER</span>
+        <button class="copy-btn" onclick="copyPassword()">نسخ</button>
+      </div>
+      
+     <!-- زر الانتقال إلى الفيديو -->
+     البكج مدمج باخر تحديث 1.05
+     <div class="centered-content">
+         <a class="zr-download pkg-download" href="pkg/pkgassassincreedUnity.html" target="_blank">1 PKG تحميل اللعبة</a>
+       </div>
+       <div class="centered-content">
+         <a class="zr-download pkg-download" href="pkg/pkg2assassincreedUnity.html" target="_blank">2 PKG تحميل اللعبة</a>
+       </div>
+       <div class="centered-content">
+         <a class="zr-download DLC-download" href="dlc/dlc2assassincreedUnity.html" target="_blank"> DLC تحميل </a>
+       </div>
+       <div class="centered-content">
+         <a class="zr-download DLC-download" href="dlc/dlc1assassincreedUnity.html" target="_blank"> DLC تحميل </a>
+       </div>
+       ✅--------------------------------------------------------------------------------------------------✅
+     <div class="centered-content">
+         <a class="zr-download game-part" href="parts/partassassincreedUnity.html" target="_blank"> 1 تحميل اللعبة بارتات   </a>
+       </div>
+       <div class="centered-content">
+         <a class="zr-download arabic-patch" href="patch/patchassassincreedUnity.html" target="_blank">تحميل التعريب 1.05</a>
+       </div>
+       <div class="centered-content">
+         <a class="zr-download DLC-download" href="dlc/dlcassassincreedUnity.html" target="_blank"> DLC تحميل </a>
+       </div>
+       ✅🔑 FREE WAR GAMER : الــــبــــاســورد🔑✅
+           <!--سهم التحميل-->
+         <div class="download-arrow">
+             <div class="arrow"></div>
+             <p>إضغط هنا لمشاهدة</p>
+         </div>
+        <!--زر الانتقال إلى الفيديو-->
+        <button class="scroll-button" onclick="scrollToVideo()">🎥 فيديو تركيب التعريب</button>
+     </div>
+     <div class="description-container">
+         <div class="description">
+             <h2>⚔️ **Assassin’s Creed Unity – الثورة تبدأ الآن!** 🇫🇷🔥</h2>
+             <p>
+                 انطلق في **شوارع باريس الثائرة** خلال أحداث **الثورة الفرنسية**،  
+                 حيث الدماء تُسفك، والملوك يسقطون، والمؤامرات تُحاك في الظلام! 🏰⚔️  
+                 العب بشخصية **آرنو دوريان**، شاب يسعى للانتقام،  
+                 لكن سرعان ما يجد نفسه غارقًا في عالم **الأساسنز وفرسان الهيكل**! 🕶️🔥  
+             </p>
+     
+             <h3>🏛️ **باريس في أوج الفوضى!** 🏰⚜️</h3>
+             <ul>
+                 <li>🕵️ **استكشف مدينة باريس الضخمة بتفاصيل مذهلة!** 🏙️</li>
+                 <li>🗡️ **انضم إلى الثورة، قاتل في الشوارع، وساعد الفقراء!** 🔥</li>
+                 <li>🕍 **تسلق كاتدرائية نوتردام، تسلل في الأزقة، وخطط للاغتيالات!** ⛪</li>
+             </ul>
+     
+             <h3>⚔️ **نظام قتال متطور – اغتيالات أكثر دقة!** 🩸🔥</h3>
+             <p>
+                 أصبح القتال أكثر **سلاسة وواقعية**، مع تحسينات في أسلوب  
+                 **المبارزة والباركور**، مما يسمح لك بالتنقل بحرية داخل  
+                 **القلاع، الشوارع، والأسطح الباريسية!** 🏰🗡️  
+             </p>
+     
+             <h3>🕶️ **طور القصة – خيانة، حب، وانتقام!** 🎭❤️</h3>
+             <ul>
+                 <li>💔 **علاقة معقدة بين آرنو وحبيبته إليز، التي تنتمي إلى فرسان الهيكل!** ⚔️</li>
+                 <li>🔪 **نفّذ اغتيالات تاريخية، واكشف الأسرار الخفية للثورة الفرنسية!** 🏴‍☠️</li>
+                 <li>🎭 **شخصيات حقيقية مثل نابليون بونابرت وماركيز دي ساد في انتظارك!** 📜</li>
+             </ul>
+     
+             <h3>🎮 **اللعب التعاوني – القتال مع الأصدقاء!** 👥⚔️</h3>
+             <p>
+                 انضم إلى ثلاثة لاعبين آخرين في **مهام تعاونية مثيرة**،  
+                 نفّذ اغتيالات معًا، استكشفوا الأزقة الباريسية،  
+                 وخططوا لحركات ثورية خطيرة! 🏰👥  
+             </p>
+     
+             <h3>🎶 **تصميم فني مذهل وتجربة غامرة!** 🎻🏛️</h3>
+             <ul>
+                 <li>🌆 **باريس تبدو نابضة بالحياة – آلاف الشخصيات تتحرك وتتفاعل!** 🏙️</li>
+                 <li>🎼 **موسيقى ملحمية تجعلك تعيش أجواء الثورة بكل تفاصيلها!** 🎶🔥</li>
+             </ul>
+     
+             <h2>🔥 **هل ستصبح أسطورة في عالم الأساسنز؟ انطلق الآن في *Assassin’s Creed Unity*!** ⚔️🇫🇷</h2>
+         </div>
+     </div>
+     🏰 **استعد لخوض الثورة، وكن أسطورة باريس القادمة!** 🔥⚔️
+      
+     
+       <!-- مراجعات المستخدمين -->
+       <div class="user-reviews">
+         <h2>مراجعات المستخدمين:</h2>
+         <p>⭐⭐⭐⭐⭐ - "لعبة مذهلة، لا تفوتها!"</p>
+         <p>⭐️⭐️⭐️⭐️ - "الرسوميات مذهلة، لكن القصة كانت أضعف قليلاً."</p>
+         <p>⭐⭐⭐⭐⭐ - "أفضل لعبة لعبتها على الإطلاق!"</p>
+       </div>
+     
+       <div class="video-container" id="video">
+         <iframe 
+             src="https://www.youtube.com/embed/Gk2G9AuAFnk" 
+             title="فيديو ترويجي - Marvels Spider Man"
+             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+             allowfullscreen>
+         </iframe>
+       </div>
+    </footer>
+    <footer class="footer">
+    <div style="text-align: center; margin-top: 20px;">
+    <a href="https://web.facebook.com/share/v/1BRSsTQf57/" target="_blank">
+        <img src="https://img.icons8.com/?size=100&id=uLWV5A9vXIPu&format=png&color=000000" alt="Facebook" width="40">
     
-    <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script>
-               
-  const gameItems = document.querySelectorAll('.game-item');
-  const itemsPerPage = 3;
-  const paginationContainer = document.getElementById('pagination');
-
-  let currentPage = 1;
-  const totalPages = Math.ceil(gameItems.length / itemsPerPage);
-
-  function showPage(page) {
-    gameItems.forEach((item, index) => {
-      if (index >= (page - 1) * itemsPerPage && index < page * itemsPerPage) {
-        item.style.display = 'block';
-      } else {
-        item.style.display = 'none';
-      }
-    });
-
-    // تحديث حالة الأزرار
-    document.querySelectorAll('.pagination button.page-btn').forEach((btn, index) => {
-      btn.classList.toggle('active', index + 1 === page);
-    });
-
-    // تعطيل أزرار السابق والتالي حسب الصفحة
-    document.getElementById('prevBtn').disabled = page === 1;
-    document.getElementById('nextBtn').disabled = page === totalPages;
-  }
-
-  function createPagination() {
-    paginationContainer.innerHTML = ''; 
-
-    const paginationDiv = document.createElement('div');
-    paginationDiv.className = 'pagination';
-
-    const prevBtn = document.createElement('button');
-    prevBtn.textContent = '«';
-    prevBtn.id = 'prevBtn';
-    prevBtn.addEventListener('click', () => {
-      if (currentPage > 1) {
-        currentPage--;
-        showPage(currentPage);
-      }
-    });
-    paginationDiv.appendChild(prevBtn);
-
-    for (let i = 1; i <= totalPages; i++) {
-      const btn = document.createElement('button');
-      btn.textContent = i;
-      btn.className = 'page-btn';
-      btn.addEventListener('click', () => {
-        currentPage = i;
-        showPage(currentPage);
-      });
-      if (i === 1) btn.classList.add('active');
-      paginationDiv.appendChild(btn);
-    }
-
-    const nextBtn = document.createElement('button');
-    nextBtn.textContent = '»';
-    nextBtn.id = 'nextBtn';
-    nextBtn.addEventListener('click', () => {
-      if (currentPage < totalPages) {
-        currentPage++;
-        showPage(currentPage);
-      }
-    });
-    paginationDiv.appendChild(nextBtn);
-
-    paginationContainer.appendChild(paginationDiv);
-  }
-
-  // تشغيل
-  createPagination();
-  showPage(currentPage);
-        const searchIcon = document.querySelector('.search-icon');
-        const searchBox = document.querySelector('.search-box');
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navbar = document.querySelector('.navbar');
-
-        searchIcon.addEventListener('click', (e) => {
-            e.stopPropagation();
-            searchBox.classList.toggle('show');
-        });
-
-        document.addEventListener('click', function (event) {
-            if (!event.target.closest('.search-container')) {
-                searchBox.classList.remove('show');
-            }
-        });
-
-        menuToggle.addEventListener('click', function() {
-            navbar.classList.toggle('open');
-            menuToggle.innerHTML = navbar.classList.contains('open') ?
-                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-        });
-
-        new Swiper('.hero-slider', {
-            loop: true,
-            autoplay: {
-                delay: 4000,
-                disableOnInteraction: false,
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
-
-        new Swiper('.latest-games-slider', {
-            slidesPerView: 2,
-            spaceBetween: 10,
-            loop: true,
-            autoplay: {
-                delay: 2500,
-                disableOnInteraction: false,
-            },
-            breakpoints: {
-                768: { slidesPerView: 4 },
-                1024: { slidesPerView: 6 }
-            }
-        });
-        // زر العودة للأعلى
-window.onscroll = function () {
-    if (document.documentElement.scrollTop > 300) {
-        $("#backToTop").fadeIn();
-    } else {
-        $("#backToTop").fadeOut();
-    }
-};
-
-$("#backToTop").click(function () {
-    $("html, body").animate({ scrollTop: 0 }, "smooth");
-});
-gameItems.forEach(item => {
-    item.addEventListener('mouseenter', () => {
-        item.style.transform = 'scale(0.9)';  // التحرك إلى الداخل (تصغير الحجم)
-    });
-
-    item.addEventListener('mouseleave', () => {
-        item.style.transform = 'scale(1)';  // العودة إلى الحجم الأصلي
-    });
-});
-function shuffleArray(array) {
-        let newArray = array.slice();
-        for (let i = newArray.length - 1; i > 0; i--) {
-            let j = Math.floor(Math.random() * (i + 1));
-            [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
-        }
-        return newArray;
-    }
-    </script>
-</body>
-</html>
+    <a href="https://www.youtube.com/@mustafahanyf" target="_blank" style="margin: 0 10px;">
+        <img src="https://img.icons8.com/?size=100&id=19318&format=png&color=000000" alt="YouTube" width="40">
+    
+    <a href="https://t.me/GOLDHEN198" target="_blank">
+        <img src="https://img.icons8.com/?size=100&id=oWiuH0jFiU0R&format=png&color=000000" alt="Telegram" width="40">
+    </div>
+    </div>
+    </div>
+    <footer class="footer">
+    <div class="footer-links">
+        <a href="terms.html">اتفاقية الاستخدام</a>
+        <a href="privacy.html">سياسة الخصوصية</a>
+        <a href="about.html">من نحن</a>
+        <a href="contact.html">اتصل بنا</a>
+    </div>
+    </div>
+    </footer>
+    <footer class="footer">
+    <div className="text-sm">Copyright &copy; 2025 | by Hanyf Mustafa</div>
+    </div>
+    <button id="backToTop" class="back-to-top">🔝</button>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+       <script>
+         function scrollToVideo() {
+                 let videoSection = document.getElementById("video");
+                 videoSection.scrollIntoView({ behavior: "smooth" }); // التمرير بسلاسة إلى الفيديو
+             }
+        function showVideo() {
+                 let videoContainer = document.getElementById("videoContainer");
+                 let video = document.getElementById("video");
+                 
+                 videoContainer.style.display = "block"; // إظهار الفيديو
+                 video.scrollIntoView({ behavior: "smooth" }); // التمرير إليه بسلاسة
+                 video.play(); // تشغيل الفيديو تلقائيًا
+             }
+         let currentIndex = 0;
+         const slides = document.querySelectorAll(".slide");
+         const totalSlides = slides.length;
+     
+         function moveSlide(step) {
+           currentIndex += step;
+           if (currentIndex >= totalSlides) currentIndex = 0;
+           if (currentIndex < 0) currentIndex = totalSlides - 1;
+           document.getElementById("slider").style.transform = `translateX(-${currentIndex * 100}%)`;
+         }
+         
+         setInterval(() => moveSlide(1), 3000); // تشغيل تلقائي
+         document.addEventListener("DOMContentLoaded", function() {
+                 console.log("Page Loaded");
+             });
+            /* ======== الأيقونة فوق السلايدر ======== */
+            document.addEventListener("DOMContentLoaded", function () {
+         const slides = document.querySelectorAll(".slide");
+     
+         slides.forEach(slide => {
+             const icon = document.createElement("img");
+             icon.classList.add("icon-overlay");
+             icon.src = ""; // مسار الأيقونة
+             icon.alt = "أيقونة";
+             slide.appendChild(icon);
+             slide.style.position = "relative"; // تأكد من أن الشريحة بها position relative
+         });
+     });
+     function shuffleArray(array) {
+             let newArray = array.slice();
+             for (let i = newArray.length - 1; i > 0; i--) {
+                 let j = Math.floor(Math.random() * (i + 1));
+                 [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+             }
+             return newArray;
+         }
+         // زر العودة للأعلى
+     window.onscroll = function () {
+         if (document.documentElement.scrollTop > 300) {
+             $("#backToTop").fadeIn();
+         } else {
+             $("#backToTop").fadeOut();
+         }
+     };
+     
+     $("#backToTop").click(function () {
+         $("html, body").animate({ scrollTop: 0 }, "smooth");
+     });
+     $(window).on('resize', function() {
+         $('.slider').slick('setPosition');
+     });
+     $(".slider").slick({
+         rtl: true,
+         infinite: true,
+         slidesToShow: 1,
+         responsive: [
+             {
+                 breakpoint: 500,
+                 settings: { slidesToShow: 1 }
+             },
+             {
+                 breakpoint: 600,
+                 settings: { slidesToShow: 2 }
+             },
+             {
+                 breakpoint: 768,
+                 settings: { slidesToShow: 3 }
+             }
+         ]
+     });
+     $(window).on('resize', function() {
+         $('.slider').slick('setPosition');
+     });
+     
+       </script>
+     </body>
+     </html>
+     
