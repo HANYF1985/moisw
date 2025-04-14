@@ -32,7 +32,7 @@
             top: 0;
             right: 0;
             left: 0;
-            background: #cbcbcb53;
+            background: #2a2a3dc2;
             padding: 10px 20px;
             z-index: 1000;
             display: flex;
@@ -40,6 +40,8 @@
             justify-content: space-between;
             flex-wrap: wrap;
             transition: top 0.3s ease-in-out;
+            font-weight: bold;
+            font-size: 24px;
         }
 
         .logo img {
@@ -334,7 +336,7 @@ transform: scale(1.1);
   .pagination button.active {
       background-color: #e68900;
   }
-
+  
   .footer {
 background-color: #0e1329; /* خلفية داكنة */
 padding: 3px;
@@ -568,6 +570,7 @@ a {
         <div class="announcement-content">
           عزيزي الزائر ✨ لتجربة أفضل وأسرع، قم بتحميل الألعاب من روابط <strong>4GAMER</strong> المتوفرة حالياً على الموقع ✅ وسيتم تحديث باقي الروابط قريباً عبر <strong>4GAMER</strong> أيضًا!
         </div>
+      </div>
       </div>
     <div class="news-ticker">
         <div class="ticker-content" id="tickerContent">
@@ -864,11 +867,28 @@ a {
             searchBox.classList.toggle('show');
         });
 
-        document.addEventListener('click', function (event) {
-            if (!event.target.closest('.search-container')) {
-                searchBox.classList.remove('show');
-            }
-        });
+        function searchGame() {
+  var input = document.getElementById("searchInput").value.toLowerCase();
+  var games = document.querySelectorAll(".game-item");
+
+  let found = false;
+
+  games.forEach(game => {
+    let gameName = game.textContent.toLowerCase();
+    if (gameName.includes(input) && input !== "") {
+      game.scrollIntoView({ behavior: "smooth", block: "center" });
+      game.style.boxShadow = "0 0 20px 5px #ffaa33";
+      found = true;
+    } else {
+      game.style.boxShadow = "none";
+    }
+  });
+
+  if (!found && input !== "") {
+    alert("❌ اللعبة غير موجودة.");
+  }
+}
+
 
         menuToggle.addEventListener('click', function() {
             navbar.classList.toggle('open');
@@ -930,28 +950,24 @@ function shuffleArray(array) {
         }
         return newArray;
     }
-function searchGame() {
-  var input = document.getElementById("searchInput").value.toLowerCase();
-  var games = document.querySelectorAll(".game-item");
+const searchInput = document.getElementById('searchInput');
+const gamesContainer = document.querySelector('.games-container');
 
-  let found = false;
+searchInput.addEventListener('input', function() {
+  // التمرير التلقائي إلى محتوى الألعاب
+  gamesContainer.scrollIntoView({ behavior: 'smooth' });
 
-  games.forEach(game => {
-    let gameName = game.textContent.toLowerCase();
-    if (gameName.includes(input) && input !== "") {
-      game.scrollIntoView({ behavior: "smooth", block: "center" });
-      game.style.boxShadow = "0 0 20px 5px #ffaa33";
-      found = true;
+  const searchValue = this.value.toLowerCase();
+
+  gameItems.forEach(item => {
+    const title = item.querySelector('.game-name').textContent.toLowerCase();
+    if (title.includes(searchValue)) {
+      item.style.display = 'block';
     } else {
-      game.style.boxShadow = "none";
+      item.style.display = 'none';
     }
   });
-
-  if (!found && input !== "") {
-    alert("❌ اللعبة غير موجودة.");
-  }
-}
-
+});
 const messages = [
   "🎮 God of War Ragnarök متوفرة الآن!",
   "🔥 Uncharted 4 A Thief's End متاحة للتنزيل!",
@@ -959,23 +975,11 @@ const messages = [
   "🚀 Call of Duty Black Ops 6 بجودة عالية!"
 ];
 
-setInterval(() => {
-  const randomIndex = Math.floor(Math.random() * messages.length);
-  document.getElementById('tickerContent').textContent = messages[randomIndex];
-}, 1000); // يغير الرسالة كل 20 ثانية
-const bottomMessages = [
-    
-];
+const tickerContent = document.getElementById('tickerContent');
 
-function updateTicker(id, messages) {
-  const ticker = document.getElementById(id);
-  let index = 0;
-  setInterval(() => {
-    ticker.textContent = messages[index];
-    index = (index + 1) % messages.length;
-  }, 20000); // كل 20 ثانية
-}
-updateTicker('bottomTicker', bottomMessages);
+ 
+
+
     </script>
 </body>
 </html>
