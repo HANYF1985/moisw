@@ -356,88 +356,67 @@ margin: 0 10px; /* تباعد بين الروابط */
 color: #e03e00; /* تغيير اللون عند التمرير */
 text-decoration: underline; /* خط تحت النص عند التمرير */
 }
+/* تنسيق الحاوية */
 .games-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 أعمدة (لتنسيق الشبكة) */
+  gap: 20px;
+  padding: 20px;
+  text-align: center;
+  justify-content: center; /* للتمركز */
   border: 2px solid #ffaa33;
   border-radius: 12px;
   padding: 10px;
   margin: 20px;
-  
+  overflow: visible;
+  height: auto;
+  direction: ltr !important;
 }
 
-.games-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 أعمدة */
-    gap: 20px; /* المسافة بين الألعاب */
-    padding: 20px;
-    text-align: center;
-}
-
+/* تنسيق العنصر داخل الحاوية */
 .game-item {
-    background-color: #2b2b3d;
-    padding: 10px;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0px 0px 6px 7px rgba(0, 0, 0, 0.3);
-    border-width: 10px 10px 30px 10px;
-    transition: transform 0.9s ease, box-shadow 0.9s ease; /* تأثير الحركة وظل العنصر */
+  background-color: #2b2b3d;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0px 0px 6px 7px rgba(0, 0, 0, 0.3);
+  border-width: 10px 10px 30px 10px;
+  transition: transform 0.9s ease, box-shadow 0.9s ease;
 }
+
 .game-item:hover {
-            box-shadow:0px 0px 14px 12px rgba(255, 183, 0, 0.512);  /* ظل أصفر عند مرور الفأرة */
-        }
+  box-shadow: 0px 0px 14px 12px rgba(255, 183, 0, 0.512);  /* ظل أصفر عند مرور الفأرة */
+}
+
 .game-item img {
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: auto;
 }
 
 .game-name {
-    padding: 10px;
-    font-size: 18px;
-    color: #fff;
-    background-color: #16152600;
-    text-align: center;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-}
-a {
-            text-decoration: none;
-        }
-        .game-item img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
+  padding: 10px;
+  font-size: 18px;
+  color: #fff;
+  background-color: #16152600;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
 }
 
-/* على الموبايل — حجم ثابت */
-@media (max-width: 600px) {
-  .game-item img {
-    width: 300px;
-    height: 228.89px;
-    object-fit: cover;
-    margin: 0 auto;
-  }
-}
 
-@media (max-width: 768px) {
-    .games-container {
-        grid-template-columns: repeat(2, 1fr); /* 2 أعمدة على الشاشات الصغيرة */
-    }
-}
-@media (max-width: 480px) {
-  .games-container {
-    grid-template-columns: repeat(1, 1fr); /* عمود واحد على الشاشات الصغيرة جداً */
-  }
-.games-container {
+
+/* عند العثور على 3 ألعاب أو أكثر */
+.games-container.found-3plus {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* تجعل العناصر تتكيف */
-  gap: 8px; /* إضافة مسافة بين الألعاب */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 }
-  
-}
+
 a {
             text-decoration: none;
         }
         
-        .news-ticker {
+.news-ticker {
   background-color: #0e1329;
   color: #fff;
   padding: 10px 0;
@@ -486,6 +465,7 @@ a {
   z-index: 9999;
   border-top: 2px solid #ff6600;   /* ✅ الحد من الأعلى */
   border-bottom: 2px solid #ff6600;
+  margin-top: 0px;
 }
 
 .announcement-content {
@@ -756,6 +736,11 @@ a {
             </a>
         </div>
     </div>
+    <div class="search-results-container" id="searchResults" style="display:none;">
+        <h3 style="color:#ffaa33; margin:10px 0;">نتائج البحث</h3>
+        <div class="games-container" id="resultsContainer"></div>
+        <button onclick="resetSearch()" class="copy-btn">عرض جميع الألعاب</button>
+      </div>
     <div id="pagination"></div>
 
 </footer>
@@ -789,229 +774,220 @@ a {
   
     
     <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-               
-  const gameItems = document.querySelectorAll('.game-item');
-  const itemsPerPage =18;
-  const paginationContainer = document.getElementById('pagination');
+  // ==============================
+// 1. إعداد المتغيرات العامة
+// ==============================
+const gameItems = document.querySelectorAll('.game-item');
+const itemsPerPage = 18;
+const paginationContainer = document.getElementById('pagination');
+const searchInput = document.getElementById('searchInput');
+const gamesContainer = document.querySelector('.games-container');
+const heroSlider = document.querySelector('.hero-slider');
+let currentPage = 1;
+const totalPages = Math.ceil(gameItems.length / itemsPerPage);
 
-  let currentPage = 1;
-  const totalPages = Math.ceil(gameItems.length / itemsPerPage);
+// ==============================
+// 2. عرض الألعاب حسب الصفحة
+// ==============================
+function showPage(page) {
+  gameItems.forEach((item, index) => {
+    item.style.display = (index >= (page - 1) * itemsPerPage && index < page * itemsPerPage) ? 'block' : 'none';
+  });
 
-  function showPage(page) {
-    gameItems.forEach((item, index) => {
-      if (index >= (page - 1) * itemsPerPage && index < page * itemsPerPage) {
-        item.style.display = 'block';
-      } else {
-        item.style.display = 'none';
-      }
+  document.querySelectorAll('.pagination button.page-btn').forEach((btn, index) => {
+    btn.classList.toggle('active', index + 1 === page);
+  });
+
+  document.getElementById('prevBtn').disabled = page === 1;
+  document.getElementById('nextBtn').disabled = page === totalPages;
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ==============================
+// 3. إنشاء أزرار الترقيم (Pagination)
+// ==============================
+function createPagination() {
+  paginationContainer.innerHTML = '';
+
+  const paginationDiv = document.createElement('div');
+  paginationDiv.className = 'pagination';
+
+  const prevBtn = document.createElement('button');
+  prevBtn.textContent = '«';
+  prevBtn.id = 'prevBtn';
+  prevBtn.addEventListener('click', () => {
+    if (currentPage > 1) showPage(--currentPage);
+  });
+  paginationDiv.appendChild(prevBtn);
+
+  for (let i = 1; i <= totalPages; i++) {
+    const btn = document.createElement('button');
+    btn.textContent = i;
+    btn.className = 'page-btn';
+    if (i === 1) btn.classList.add('active');
+    btn.addEventListener('click', () => {
+      currentPage = i;
+      showPage(currentPage);
     });
-
-    // تحديث حالة الأزرار
-    document.querySelectorAll('.pagination button.page-btn').forEach((btn, index) => {
-      btn.classList.toggle('active', index + 1 === page);
-    });
-
-    // تعطيل أزرار السابق والتالي حسب الصفحة
-    document.getElementById('prevBtn').disabled = page === 1;
-    document.getElementById('nextBtn').disabled = page === totalPages;
+    paginationDiv.appendChild(btn);
   }
 
-  function createPagination() {
-    paginationContainer.innerHTML = ''; 
+  const nextBtn = document.createElement('button');
+  nextBtn.textContent = '»';
+  nextBtn.id = 'nextBtn';
+  nextBtn.addEventListener('click', () => {
+    if (currentPage < totalPages) showPage(++currentPage);
+  });
+  paginationDiv.appendChild(nextBtn);
 
-    const paginationDiv = document.createElement('div');
-    paginationDiv.className = 'pagination';
+  paginationContainer.appendChild(paginationDiv);
+}
 
-    const prevBtn = document.createElement('button');
-    prevBtn.textContent = '«';
-    prevBtn.id = 'prevBtn';
-    prevBtn.addEventListener('click', () => {
-      if (currentPage > 1) {
-        currentPage--;
-        showPage(currentPage);
-      }
-    });
-    paginationDiv.appendChild(prevBtn);
+// ==============================
+// 4. البحث في الألعاب مع تنسيق النتائج
+// ==============================
+function searchGames(keyword) {
+  const container = document.querySelector('.games-container');
+  const matchedGames = [];
 
-    for (let i = 1; i <= totalPages; i++) {
-      const btn = document.createElement('button');
-      btn.textContent = i;
-      btn.className = 'page-btn';
-      btn.addEventListener('click', () => {
-        currentPage = i;
-        showPage(currentPage);
-      });
-      if (i === 1) btn.classList.add('active');
-      paginationDiv.appendChild(btn);
-    }
-
-    const nextBtn = document.createElement('button');
-    nextBtn.textContent = '»';
-    nextBtn.id = 'nextBtn';
-    nextBtn.addEventListener('click', () => {
-      if (currentPage < totalPages) {
-        currentPage++;
-        showPage(currentPage);
-      }
-    });
-    paginationDiv.appendChild(nextBtn);
-
-    paginationContainer.appendChild(paginationDiv);
-  }
-
-  // تشغيل
-  createPagination();
-  showPage(currentPage);
-        const searchIcon = document.querySelector('.search-icon');
-        const searchBox = document.querySelector('.search-box');
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navbar = document.querySelector('.navbar');
-
-        searchIcon.addEventListener('click', (e) => {
-            e.stopPropagation();
-            searchBox.classList.toggle('show');
-        });
-
-        function searchGame() {
-  var input = document.getElementById("searchInput").value.toLowerCase();
-  var games = document.querySelectorAll(".game-item");
-
-  let found = false;
-
-  games.forEach(game => {
-    let gameName = game.textContent.toLowerCase();
-    if (gameName.includes(input) && input !== "") {
-      game.scrollIntoView({ behavior: "smooth", block: "center" });
-      game.style.boxShadow = "0 0 20px 5px #ffaa33";
-      found = true;
+  gameItems.forEach(game => {
+    const gameName = game.querySelector('.game-name').textContent.toLowerCase();
+    if (gameName.includes(keyword)) {
+      game.classList.add('found');
+      matchedGames.push(game);
     } else {
-      game.style.boxShadow = "none";
+      game.classList.remove('found');
     }
   });
 
-  if (!found && input !== "") {
-    alert("❌ اللعبة غير موجودة.");
+  container.classList.remove('found-1', 'found-2', 'found-3plus');
+  if (window.innerWidth > 768) {
+    if (matchedGames.length === 1) {
+      container.classList.add('found-1');
+      matchedGames[0].style.margin = '0 auto';
+    } else if (matchedGames.length === 2) {
+      container.classList.add('found-2');
+      matchedGames.forEach(game => game.style.margin = '0 auto');
+    } else if (matchedGames.length >= 3) {
+      container.classList.add('found-3plus');
+      matchedGames.forEach(game => game.style.margin = '0');
+    }
   }
 }
 
-
-        menuToggle.addEventListener('click', function() {
-            navbar.classList.toggle('open');
-            menuToggle.innerHTML = navbar.classList.contains('open') ?
-                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-        });
-
-        new Swiper('.hero-slider', {
-            loop: true,
-            autoplay: {
-                delay: 4000,
-                disableOnInteraction: false,
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
-
-        new Swiper('.latest-games-slider', {
-            slidesPerView: 2,
-            spaceBetween: 10,
-            loop: true,
-            autoplay: {
-                delay: 2500,
-                disableOnInteraction: false,
-            },
-            breakpoints: {
-                768: { slidesPerView: 4 },
-                1024: { slidesPerView: 6 }
-            }
-        });
-        // زر العودة للأعلى
-window.onscroll = function () {
-    if (document.documentElement.scrollTop > 300) {
-        $("#backToTop").fadeIn();
-    } else {
-        $("#backToTop").fadeOut();
-    }
-};
-
-$("#backToTop").click(function () {
-    $("html, body").animate({ scrollTop: 0 }, "smooth");
-});
-gameItems.forEach(item => {
-    item.addEventListener('mouseenter', () => {
-        item.style.transform = 'scale(0.9)';  // التحرك إلى الداخل (تصغير الحجم)
-    });
-
-    item.addEventListener('mouseleave', () => {
-        item.style.transform = 'scale(1)';  // العودة إلى الحجم الأصلي
-    });
-});
-function shuffleArray(array) {
-        let newArray = array.slice();
-        for (let i = newArray.length - 1; i > 0; i--) {
-            let j = Math.floor(Math.random() * (i + 1));
-            [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
-        }
-        return newArray;
-    }
-const searchInput = document.getElementById('searchInput');
-const gamesContainer = document.querySelector('.games-container');
-
+// ==============================
+// 5. تشغيل البحث مع إظهار/إخفاء السلايدر بأنيميشن
+// ==============================
 searchInput.addEventListener('input', function() {
-  // التمرير التلقائي إلى محتوى الألعاب
   gamesContainer.scrollIntoView({ behavior: 'smooth' });
-
   const searchValue = this.value.toLowerCase();
 
   gameItems.forEach(item => {
     const title = item.querySelector('.game-name').textContent.toLowerCase();
-    if (title.includes(searchValue)) {
-      item.style.display = 'block';
-    } else {
-      item.style.display = 'none';
-    }
-  });
-});
-const messages = [
-  "🎮 God of War Ragnarök متوفرة الآن!",
-  "🔥 Uncharted 4 A Thief's End متاحة للتنزيل!",
-  "🎉 The Last of Us 2 قادمة قريباً بالعربية!",
-  "🚀 Call of Duty Black Ops 6 بجودة عالية!"
-];
-
-const tickerContent = document.getElementById('tickerContent');
-
- 
-const heroSlider = document.querySelector('.hero-slider');
-
-searchInput.addEventListener('input', function() {
-  gamesContainer.scrollIntoView({ behavior: 'smooth' });
-
-  const searchValue = this.value.toLowerCase();
-  let foundCount = 0;
-
-  gameItems.forEach(item => {
-    const title = item.querySelector('.game-name').textContent.toLowerCase();
-    if (title.includes(searchValue)) {
-      item.style.display = 'block';
-      foundCount++;
-    } else {
-      item.style.display = 'none';
-    }
+    item.style.display = title.includes(searchValue) ? 'block' : 'none';
   });
 
-  // إذا فيه نص في البحث — نخفي السلايدر
+  // تحريك السلايدر عند الإظهار/الإخفاء
   if (searchValue.trim() !== "") {
-    heroSlider.style.display = 'none';
+    heroSlider.style.opacity = '0';
+    setTimeout(() => heroSlider.style.display = 'none', 300);
   } else {
-    // لو مافيه بحث — نظهر السلايدر ونرجع ترتيب الألعاب الطبيعي
     heroSlider.style.display = 'block';
+    setTimeout(() => heroSlider.style.opacity = '1', 50);
     showPage(currentPage);
   }
+
+  searchGames(searchValue);
 });
+
+// ==============================
+// 6. تحريك صور الألعاب عند التمرير عليها
+// ==============================
+gameItems.forEach(item => {
+  item.addEventListener('mouseenter', () => item.style.transform = 'scale(0.9)');
+  item.addEventListener('mouseleave', () => item.style.transform = 'scale(1)');
+});
+
+// ==============================
+// 7. إعداد القائمة والبحث (الهيدر)
+// ==============================
+const searchIcon = document.querySelector('.search-icon');
+const searchBox = document.querySelector('.search-box');
+const menuToggle = document.querySelector('.menu-toggle');
+const navbar = document.querySelector('.navbar');
+
+searchIcon.addEventListener('click', (e) => {
+  e.stopPropagation();
+  searchBox.classList.toggle('show');
+});
+
+menuToggle.addEventListener('click', () => {
+  navbar.classList.toggle('open');
+  menuToggle.innerHTML = navbar.classList.contains('open')
+    ? '<i class="fas fa-times"></i>' 
+    : '<i class="fas fa-bars"></i>';
+});
+
+// ==============================
+// 8. إعداد سلايدر Swiper
+// ==============================
+new Swiper('.hero-slider', {
+  loop: true,
+  autoplay: { delay: 4000, disableOnInteraction: false },
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+});
+
+new Swiper('.latest-games-slider', {
+  slidesPerView: 2,
+  spaceBetween: 10,
+  loop: true,
+  autoplay: { delay: 2500, disableOnInteraction: false },
+  breakpoints: {
+    768: { slidesPerView: 4 },
+    1024: { slidesPerView: 6 }
+  }
+});
+
+// ==============================
+// 9. زر العودة للأعلى
+// ==============================
+window.onscroll = () => {
+  if (document.documentElement.scrollTop > 300) {
+    $("#backToTop").fadeIn();
+  } else {
+    $("#backToTop").fadeOut();
+  }
+};
+
+$("#backToTop").click(() => {
+  $("html, body").animate({ scrollTop: 0 }, "smooth");
+});
+
+// ==============================
+// 10. دالة خلط الألعاب
+// ==============================
+function shuffleArray(array) {
+  let newArray = array.slice();
+  for (let i = newArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+  }
+  return newArray;
+}
+
+// ==============================
+// 11. تشغيل النظام
+// ==============================
+createPagination();
+showPage(currentPage);
 
 
     </script>
