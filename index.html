@@ -214,7 +214,17 @@
             height: auto;
             display: block;
         }
-
+        .hero-slider {
+           transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+       .hero-slider.hidden {
+          opacity: 0;
+          visibility: hidden;
+        }
+       .hero-slider.visible {
+           opacity: 1;
+           visibility: visible;
+           }
         .latest-games-slider {
             position: absolute;
             bottom: 20px;
@@ -477,6 +487,34 @@ a {
 @keyframes announcementScroll {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-100%); }
+}
+@media (max-width: 768px) {
+  .games-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+    transition: all 0.3s ease;
+  }
+
+  .games-container.found-1 {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .games-container.found-2 {
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+  }
+
+  .games-container.found-3plus {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+
+  body.no-scroll {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+  }
 }
 
     </style>
@@ -894,13 +932,13 @@ searchInput.addEventListener('input', function() {
 
   // تحريك السلايدر عند الإظهار/الإخفاء
   if (searchValue.trim() !== "") {
-    heroSlider.style.opacity = '0';
-    setTimeout(() => heroSlider.style.display = 'none', 300);
-  } else {
-    heroSlider.style.display = 'block';
-    setTimeout(() => heroSlider.style.opacity = '1', 50);
-    showPage(currentPage);
-  }
+  heroSlider.classList.remove('visible');
+  heroSlider.classList.add('hidden');
+} else {
+  heroSlider.classList.remove('hidden');
+  heroSlider.classList.add('visible');
+  showPage(currentPage);
+}
 
   searchGames(searchValue);
 });
@@ -989,6 +1027,45 @@ function shuffleArray(array) {
 createPagination();
 showPage(currentPage);
 
+function searchGames(keyword) {
+  const games = document.querySelectorAll('.game-item');
+  const container = document.querySelector('.games-container');
+  let matchedGames = [];
+
+  games.forEach(game => {
+    const gameName = game.querySelector('.game-name').textContent;
+    if (gameName.toLowerCase().includes(keyword.toLowerCase())) {
+      game.style.display = 'block';
+      matchedGames.push(game);
+    } else {
+      game.style.display = 'none';
+    }
+  });
+
+  container.classList.remove('found-1', 'found-2', 'found-3plus');
+
+  if (window.innerWidth <= 768) {
+    // ترتيب المصفوفة حسب عدد النتائج
+    if (matchedGames.length === 1) {
+      container.classList.add('found-1');
+    } else if (matchedGames.length === 2) {
+      container.classList.add('found-2');
+    } else if (matchedGames.length >= 3) {
+      container.classList.add('found-3plus');
+    }
+
+    // إلغاء السكرول وقت البحث
+    if (keyword.trim() !== "") {
+      document.body.classList.add('no-scroll');
+    } else {
+      document.body.classList.remove('no-scroll');
+    }
+  } else {
+    // في الديسكتوب نرجع تنسيق الألعاب الطبيعي
+    container.classList.remove('found-1', 'found-2', 'found-3plus');
+    document.body.classList.remove('no-scroll');
+  }
+}
 
     </script>
 </body>
