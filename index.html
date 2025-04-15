@@ -368,31 +368,21 @@ text-decoration: underline; /* خط تحت النص عند التمرير */
 }
 /* تنسيق الحاوية */
 .games-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 أعمدة (لتنسيق الشبكة) */
-  gap: 20px;
-  padding: 20px;
-  text-align: center;
-  justify-content: center; /* للتمركز */
-  border: 2px solid #ffaa33;
-  border-radius: 12px;
-  padding: 10px;
-  margin: 20px;
-  overflow: visible;
-  height: auto;
-  direction: ltr !important;
+    margin-top: 100px;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
 }
 
 /* تنسيق العنصر داخل الحاوية */
 .game-item {
-  background-color: #2b2b3d;
-  padding: 10px;
-  border-radius: 10px;
-  text-align: center;
-  box-shadow: 0px 0px 6px 7px rgba(0, 0, 0, 0.3);
-  border-width: 10px 10px 30px 10px;
-  transition: transform 0.9s ease, box-shadow 0.9s ease;
-}
+    background: #292942;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease;
+    }
 
 .game-item:hover {
   box-shadow: 0px 0px 14px 12px rgba(255, 183, 0, 0.512);  /* ظل أصفر عند مرور الفأرة */
@@ -487,34 +477,6 @@ a {
 @keyframes announcementScroll {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-100%); }
-}
-@media (max-width: 768px) {
-  .games-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 10px;
-    transition: all 0.3s ease;
-  }
-
-  .games-container.found-1 {
-    grid-template-columns: 1fr;
-    justify-items: center;
-  }
-
-  .games-container.found-2 {
-    grid-template-columns: repeat(2, 1fr);
-    justify-items: center;
-  }
-
-  .games-container.found-3plus {
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  }
-
-  body.no-scroll {
-    overflow: hidden;
-    position: fixed;
-    width: 100%;
-  }
 }
 
     </style>
@@ -932,15 +894,12 @@ searchInput.addEventListener('input', function() {
 
   // تحريك السلايدر عند الإظهار/الإخفاء
   if (searchValue.trim() !== "") {
-  heroSlider.classList.remove('visible');
-  heroSlider.classList.add('hidden');
-} else {
-  heroSlider.classList.remove('hidden');
-  heroSlider.classList.add('visible');
-  showPage(currentPage);
-}
-
-  searchGames(searchValue);
+    heroSlider.style.display = 'none';
+  } else {
+    // لو مافيه بحث — نظهر السلايدر ونرجع ترتيب الألعاب الطبيعي
+    heroSlider.style.display = 'block';
+    showPage(currentPage);
+  }
 });
 
 // ==============================
@@ -958,19 +917,22 @@ const searchIcon = document.querySelector('.search-icon');
 const searchBox = document.querySelector('.search-box');
 const menuToggle = document.querySelector('.menu-toggle');
 const navbar = document.querySelector('.navbar');
-
 searchIcon.addEventListener('click', (e) => {
   e.stopPropagation();
   searchBox.classList.toggle('show');
+
+  // لو ظهر صندوق البحث — يركز المؤشر
+  if (searchBox.classList.contains('show')) {
+    searchInput.focus();
+  }
 });
 
-menuToggle.addEventListener('click', () => {
-  navbar.classList.toggle('open');
-  menuToggle.innerHTML = navbar.classList.contains('open')
-    ? '<i class="fas fa-times"></i>' 
-    : '<i class="fas fa-bars"></i>';
+// عند الضغط في أي مكان خارج الصندوق أو الأيقونة — يغلق
+document.addEventListener('click', (e) => {
+  if (!searchBox.contains(e.target) && !searchIcon.contains(e.target)) {
+    searchBox.classList.remove('show');
+  }
 });
-
 // ==============================
 // 8. إعداد سلايدر Swiper
 // ==============================
@@ -1027,45 +989,6 @@ function shuffleArray(array) {
 createPagination();
 showPage(currentPage);
 
-function searchGames(keyword) {
-  const games = document.querySelectorAll('.game-item');
-  const container = document.querySelector('.games-container');
-  let matchedGames = [];
-
-  games.forEach(game => {
-    const gameName = game.querySelector('.game-name').textContent;
-    if (gameName.toLowerCase().includes(keyword.toLowerCase())) {
-      game.style.display = 'block';
-      matchedGames.push(game);
-    } else {
-      game.style.display = 'none';
-    }
-  });
-
-  container.classList.remove('found-1', 'found-2', 'found-3plus');
-
-  if (window.innerWidth <= 768) {
-    // ترتيب المصفوفة حسب عدد النتائج
-    if (matchedGames.length === 1) {
-      container.classList.add('found-1');
-    } else if (matchedGames.length === 2) {
-      container.classList.add('found-2');
-    } else if (matchedGames.length >= 3) {
-      container.classList.add('found-3plus');
-    }
-
-    // إلغاء السكرول وقت البحث
-    if (keyword.trim() !== "") {
-      document.body.classList.add('no-scroll');
-    } else {
-      document.body.classList.remove('no-scroll');
-    }
-  } else {
-    // في الديسكتوب نرجع تنسيق الألعاب الطبيعي
-    container.classList.remove('found-1', 'found-2', 'found-3plus');
-    document.body.classList.remove('no-scroll');
-  }
-}
 
     </script>
 </body>
