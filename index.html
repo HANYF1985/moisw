@@ -192,316 +192,195 @@
         .search-box.show {
             display: block;
         }
-           #searchInput {
-          padding: 10px;
-          width: 100px;
-          font-size: 16px;
-         border: 1px solid #ccc;
-         border-radius: 5px;
-        }
-        .slider-wrapper {
-            position: relative;
-            max-width: 100%;
-            margin: 40px auto;
-            border-radius: 15px;
-            overflow: hidden;
-        
-        }
-
-        .hero-slider img {
-            width: 100%;
-            border-radius: 15px;
-            height: auto;
-            display: block;
-        }
         .hero-slider {
-           transition: opacity 0.5s ease, visibility 0.5s ease;
-        }
-       .hero-slider.hidden {
-          opacity: 0;
-          visibility: hidden;
-        }
-       .hero-slider.visible {
-           opacity: 1;
-           visibility: visible;
-           }
-        .latest-games-slider {
-            position: absolute;
-            bottom: 20px;
-            right: 0;
-            left: 0;
-            overflow: hidden;
-            padding: 10px 20px;
-            background: rgba(28, 28, 46, 0);
-            border-radius: 15px;
-            backdrop-filter: blur(0px);
-            max-width: 70%;
-            margin: 0 auto;
-            mask-image: linear-gradient(to right, transparent, #000 10% 90%, transparent);
-            display: block;
-        }
-        .latest-games-slider.list {
-            width: 200px;
-    height: 200px;
-    position: absolute;
-    left: 100%;
-    animation: autoRun 10s linear infinite;
-    transition: filter 0.5s;
-    animation-delay: calc((10s / 9) * (var(--position) - 1) - 10s) !important;
-}
-        .latest-games-slider .swiper-slide {
-            background-color: #2a2a3d00;
-    padding: 10px;
-    border-radius: 10px;
-    text-align: center;
-    color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0);
-}
-        .latest-games-slider:hover .item {
-    animation-play-state: paused !important;
-    filter: grayscale(1);
+      width: 100%;
+      height: 450px;
+      position: relative;
+      overflow: hidden;
     }
-.latest-games-slider .item:hover {
-    filter: grayscale(0);
-}
 
-.fade-in {
-    animation: fadeIn 1s ease-in-out;
-}
-
-
- /* Adding the custom animation for the latest games slider */
-@keyframes autoRun {
-    0% {
-        transform: translateX(100%);
+    .hero-slider .swiper-slide {
+      position: relative;
+      transition: opacity 1s ease-in-out;
     }
-    100% {
-        transform: translateX(-100%);
+
+    .hero-slider img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
-}
 
-.latest-games-slider .swiper-wrapper {
-    display: flex;
-    animation: autoRun 08s linear infinite; /* 10s is the duration for one loop, adjust as needed */
-}
-.latest-games-slider img {
-    width: 100%;
-    height: 55%;
-    border-radius: 10px;
-}
-/* عند توقف مرور الفأرة على السلايدر، تتحول جميع الصور إلى اللون الرمادي */
-.latest-games-slider:hover .swiper-slide img {
-    filter: grayscale(100%) !important; /* تحويل الصور إلى اللون الرمادي */
-}
+    .slide-overlay {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      padding: 30px 20px;
+      background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0));
+      color: #fff;
+      text-align: center;
+    }
 
-/* عندما يكون الفأرة على صورة معينة، يتم إلغاء تأثير الـ grayscale (إبقاء الصورة ملونة) */
-.latest-games-slider .swiper-slide:hover img {
-    filter: grayscale(0%) !important; /* إبقاء الصورة ملونة */
-    transform: scale(1.05); /* تكبير الصورة قليلاً عند المرور عليها */
-}
+    .slide-overlay h2 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: bold;
+    }
 
-/* تأثير الانتقال لإعطاء سلاسة عند التغيير بين الرمادي والملون */
-.latest-games-slider .swiper-slide img {
-    transition: filter 0.3s ease, transform 0.3s ease;
-}
+    .download-btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #ff6600;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
 
-/* عند مرور الفأرة على السلايدر يتوقف الحركة */
-.latest-games-slider:hover .swiper-wrapper {
-    animation-play-state: paused; /* إيقاف الأنيميشن */
-}
-.back-to-top {
-position: fixed;
-bottom: 20px;
-right: 20px;
-width: 50px;
-height: 50px;
-background-color: #007bff;
-color: white;
-border: none;
-border-radius: 50%;
-font-size: 20px;
-cursor: pointer;
-display: none; /* مخفي افتراضياً */
-align-items: center;
-justify-content: center;
-transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.back-to-top:hover {
-background-color: #0056b3;
-transform: scale(1.1);
-}
-
-  .pagination {
-    margin-top: 20px;
-  }
-  .pagination button {
-    margin: 5px;
-      padding: 10px;
-      border: none;
-      background-color: gray;
-      color: white;
-      cursor: pointer;
-  }
-  .pagination button.active {
+    .download-btn:hover {
       background-color: #e68900;
-  }
-  
-  .footer {
-background-color: #0e1329; /* خلفية داكنة */
-padding: 3px;
-text-align: center;
-text-decoration: none;
-}
+    }
 
-.footer-links a {
-color: white; /* لون النص أبيض */
-font-size: 18px; /* حجم الخط */
-font-weight: bold; /* جعل النص عريض */
-text-decoration: none; /* إزالة الخط السفلي */
-margin: 0 10px; /* تباعد بين الروابط */
-}
-
-.footer-links a:hover {
-color: #e03e00; /* تغيير اللون عند التمرير */
-text-decoration: underline; /* خط تحت النص عند التمرير */
-}
-/* تنسيق الحاوية */
-.games-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 أعمدة (لتنسيق الشبكة) */
-  gap: 20px;
-  padding: 20px;
-  text-align: center;
-  justify-content: center; /* للتمركز */
-  border: 2px solid #ffaa33;
-  border-radius: 12px;
-  padding: 10px;
-  margin: 20px;
-  overflow: visible;
-  height: auto;
-  direction: ltr !important;
-}
-
-/* تنسيق العنصر داخل الحاوية */
-.game-item {
-  background-color: #2b2b3d;
-  padding: 10px;
-  border-radius: 10px;
-  text-align: center;
-  box-shadow: 0px 0px 6px 7px rgba(0, 0, 0, 0.3);
-  border-width: 10px 10px 30px 10px;
-  transition: transform 0.9s ease, box-shadow 0.9s ease;
-}
-
-.game-item:hover {
-  box-shadow: 0px 0px 14px 12px rgba(255, 183, 0, 0.512);  /* ظل أصفر عند مرور الفأرة */
-}
-
-.game-item img {
-  width: 100%;
-  height: auto;
-}
-
-.game-name {
-  padding: 10px;
-  font-size: 18px;
-  color: #fff;
-  background-color: #16152600;
-  text-align: center;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-}
-
-
-
-/* عند العثور على 3 ألعاب أو أكثر */
-.games-container.found-3plus {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-a {
-            text-decoration: none;
-        }
-        
-.news-ticker {
-  background-color: #0e1329;
-  color: #fff;
-  padding: 10px 0;
-  overflow: hidden;
-  position: relative;
-  white-space: nowrap;
-  font-size: 16px;
-  border-bottom: 2px solid #ff6600;
-}
-
-.ticker-content {
-  display: inline-block;
-  padding-left: 100%;
-  animation: ticker 20s linear infinite;
-}
-
-@keyframes ticker {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
-}
-.news-ticker.bottom {
-  bottom: 0;
-  border-top: 2px solid #ff6600;
-}
-
-.ticker-content {
-  display: inline-block;
-  padding-left: 100%;
-  animation: ticker 20s linear infinite;
-}
-
-@keyframes ticker {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
-}
-.special-announcement {
-  background-color: #0e1329;
-  color: #fff;
-  padding: 12px 0;
-  overflow: hidden;
-  position: relative;
-  top: 0;
-  width: 100%;
-  white-space: nowrap;
-  font-size: 16px;
-  z-index: 9999;
-  border-top: 2px solid #ff6600;   /* ✅ الحد من الأعلى */
-  border-bottom: 2px solid #ff6600;
+    .swiper-button-next,
+    .swiper-button-prev {
+      color: #fff;
+    }
+    .top-games {
+  padding: 20px 0;
+  background-color: #1c1c2e;
   margin-top: 0px;
 }
 
-.announcement-content {
-  display: inline-block;
-  padding-left: 100%;
-  animation: announcementScroll 30s linear infinite;
+.top-games h2 {
+  font-size: 24px;
+  color: #fff;
+  margin-bottom: 15px;
+  margin-top:0px ;
 }
 
-@keyframes announcementScroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
-}
-@media (max-width: 768px) {
-  .games-container .game-item {
-    width: 90% !important;
-    margin: 10px auto !important;
-    display: block !important;
-    transform: scale(1);
-  }
-
-  .pagination {
-    display: none;
-  }
+.games-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
 }
 
-    </style>
+.game-card {
+  background: #2a2a3d;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 200px;
+  transition: transform 0.3s;
+}
+
+.game-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.game-card h3 {
+  margin: 0px 0 5px;
+  font-size: 16px;
+  color: #fff;
+}
+
+.stars {
+  padding: 5px 0 10px;
+  background: #17172f;
+}
+
+.stars i {
+  color: #ffcc00;
+  margin: 0 1px;
+  font-size: 14px;
+}
+
+.game-card:hover {
+  transform: scale(1.03);
+}
+
+.news-ticker {
+  background-color: #e68900;
+  color: #1c1c2e;
+  font-weight: bold;
+  padding: 8px 0;
+  font-size: 14px;
+}
+.widget-games {
+  background: #1c1c2e;
+  padding: 60px 20px; /* زيادة التباعد الداخلي في الأعلى والأسفل */
+  border-radius: 15px;
+  width: 100%;
+  max-width: 1360px;
+  margin: 20px auto;
+  
+}
+
+
+.widget-title h2 {
+  font-size: 28px; /* حجم العنوان */
+  text-align: center;
+  margin-bottom: 15px;
+  color: #fff;
+  margin-top: 0px;
+}
+
+.widget-content {
+  overflow: hidden;
+}
+
+.library-games-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 أعمدة ثابتة */
+  gap: 20px;
+  padding: 0 10px;
+  margin: 0 auto;  /* التأكد من المحاذاة الوسط */
+
+}
+
+.game-container {
+  background: #2a2a3d;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0px 0px 6px 7px rgba(0, 0, 0, 0.3);
+  border-width: 10px 10px 30px 10px;
+  transition: transform 0.9s ease, box-shadow 0.9s ease;
+  
+}
+.game-container:hover {
+  box-shadow: 0px 0px 14px 12px rgba(255, 183, 0, 0.512);  /* ظل أصفر عند مرور الفأرة */
+}
+
+.game-container img {
+  width: 100%;
+  height: 220px; /* حجم صورة اللعبة */
+  object-fit: cover;
+  border-radius: 10px;
+}
+.game-container {
+  transition: 0.3s;
+}
+.game-container:hover {
+  transform: scale(0.95);
+}
+
+.game-container h3 {
+  font-size: 18px; /* حجم العنوان داخل الحاوية */
+  text-align: center;
+  color: #fff;
+  margin-top: 8px;
+}
+.widget-content {
+  padding-top: 20px;  /* تباعد إضافي بين العنوان والمحتوى */
+}
+.widget-content {
+  padding-top: 20px;
+  padding-bottom: 20px; /* تباعد سفلي إضافي */
+}
+
+ </style>
 </head>
 <body>
     <header class="header">
@@ -539,488 +418,187 @@ a {
             
         </div>
     </header>
+            
+        </div>
+    </header>
+    <div class="hero-slider swiper">
+        <div class="swiper-wrapper" id="sliderContent">
+            <!-- سيتم إضافة الشرائح هنا تلقائيًا بواسطة JavaScript -->
+        </div>
+      
 
-    <!-- السلايدر الكبير مع شريط الألعاب -->
-    <div class="slider-wrapper">
-        <div class="swiper hero-slider">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide"><a href="https://example.com/game1" target="_blank"><img src="https://a.top4top.io/p_3195zke7i2.jpg" alt="صورة 1"></a></div>
-                <div class="swiper-slide"><a href="https://example.com/game2" target="_blank"><img src="https://p4.wallpaperbetter.com/wallpaper/320/998/398/nathan-drake-uncharted-4-a-thiefs-end-best-games-of-2016-wallpaper-preview.jpg" alt="صورة 2"></a></div>
-                <div class="swiper-slide"><a href="https://example.com/game3" target="_blank"><img src="https://i.postimg.cc/nrd071xM/The-Last-of-Us-2.webp" alt="صورة 3"></a></div>
-                <div class="swiper-slide"><a href="https://example.com/game4" target="_blank"><img src="https://i.postimg.cc/Hsx0vDqM/The-Shadow-of-the-Tomb-Raider-6.webp" alt="صورة 4"></a></div>
-                <div class="swiper-slide"><a href="https://example.com/game5" target="_blank"><img src="https://i.postimg.cc/MGw68WB6/Call-of-Duty-Black-Ops-6-2.jpg" alt="صورة 5"></a></div>
-                <div class="swiper-slide"><a href="https://example.com/game6" target="_blank"><img src="https://i.blogs.es/0909e3/22d5eb03beb6c11b403050ac006039aa/1366_2000.jpeg" alt="صورة 6"></a></div>
+      </div>
+      <section class="top-games">
+        <h2>🔥 Top Games</h2>
+        <div class="games-grid">
+          <!-- لعبة 1 -->
+          <div class="game-card">
+            <img src="https://a.top4top.io/p_3195zke7i2.jpg" alt="لعبة 1">
+            <h3>لعبة 1</h3>
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
             </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-
-            <!-- سلايدر أحدث الألعاب -->
-            <div class="swiper latest-games-slider">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <a href="https://example.com/gow4" target="_blank">
-                            <img src="assets/godofwar4.jpg" alt="لعبة 1">
-                        </a>
-                    </div>
-                    <div class="swiper-slide">
-                        <a href="https://example.com/tlou2" target="_blank">
-                            <img src="assets/tlou2.jpg" alt="لعبة 2">
-                        </a>
-                    </div>
-                    <div class="swiper-slide">
-                        <a href="https://example.com/gowragnarok" target="_blank">
-                            <img src="assets/gowragnarok.jpg" alt="لعبة 3">
-                        </a>
-                    </div>
-                </div>
+          </div>
+      
+          <!-- لعبة 2 -->
+          <div class="game-card">
+            <img src="https://p4.wallpaperbetter.com/wallpaper/320/998/398/nathan-drake-uncharted-4-a-thiefs-end-best-games-of-2016-wallpaper-preview.jpg" alt="لعبة 2">
+            <h3>لعبة 2</h3>
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+              <i class="far fa-star"></i>
             </div>
+          </div>
+      
+          <!-- لعبة 3 -->
+          <div class="game-card">
+            <img src="https://i.postimg.cc/nrd071xM/The-Last-of-Us-2.webp" alt="لعبة 3">
+            <h3>لعبة 3</h3>
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+      
+          <!-- لعبة 4 -->
+          <div class="game-card">
+            <img src="https://i.postimg.cc/Hsx0vDqM/The-Shadow-of-the-Tomb-Raider-6.webp" alt="لعبة 4">
+            <h3>لعبة 4</h3>
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="far fa-star"></i>
+            </div>
+          </div>
+      
+          <!-- لعبة 5 -->
+          <div class="game-card">
+            <img src="https://i.postimg.cc/MGw68WB6/Call-of-Duty-Black-Ops-6-2.jpg" alt="لعبة 5">
+            <h3>لعبة 5</h3>
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+              <i class="far fa-star"></i>
+              <i class="far fa-star"></i>
+            </div>
+          </div>
         </div>
-    </div>
-    <div class="special-announcement">
-        <div class="announcement-content">
-          عزيزي الزائر ✨ لتجربة أفضل وأسرع، قم بتحميل الألعاب من روابط <strong>4GAMER</strong> المتوفرة حالياً على الموقع ✅ وسيتم تحديث باقي الروابط قريباً عبر <strong>4GAMER</strong> أيضًا!
-        </div>
+      </section>
+      <div class="news-ticker">
+        <marquee behavior="scroll" direction="right">
+          🎮 تمت إضافة لعبة The Last of Us 2 — حملها الآن! | 🔥 قريبًا: Ghost of Tsushima مترجمة | 🎉 أكثر من 50 لعبة متاحة الآن مجانا!
+        </marquee>
       </div>
-      </div>
-    <div class="news-ticker">
-        <div class="ticker-content" id="tickerContent">
-            🎮 God of War Ragnarök متوفرة الآن! | 🔥 Uncharted 4 A Thief's End متاحة للتنزيل! | 🎉 The Last of Us 2 قادمة قريباً بالعربية! | 🚀 Call of Duty Black Ops 6 بجودة عالية!
+      <section class="widget-games">
+        <div class="widget-title">
+          <h2>🎮 أفضل الألعاب</h2>
         </div>
-     
-      </div>
-    <h1> PS4 لتحميل أحدث ألعاب </h1>
-
-    <div class="games-container">
-        
-        <!-- لعبة 1 -->
-        <div class="game-item">
-            <a href="https://example.com/game1" target="_blank">
-                <img src="https://a.top4top.io/p_3195zke7i2.jpg" alt="لعبة 1">
-                <div class="game-name">God of War Ragnarök </div>
-            </a>
+        <div class="widget-content">
+          <div class="library-games-grid">
+            <div class="game-container">
+          <!-- سيتم توليد الألعاب هنا -->
         </div>
-        <!-- لعبة 2 -->
-        <div class="game-item">
-            <a href="https://example.com/game2" target="_blank">
-                <img src="https://p4.wallpaperbetter.com/wallpaper/320/998/398/nathan-drake-uncharted-4-a-thiefs-end-best-games-of-2016-wallpaper-preview.jpg" alt="لعبة 2">
-                <div class="game-name">Uncharted 4 A Thiefs End </div>
-            </a>
-        </div>
-        <!-- لعبة 3 -->
-        <div class="game-item">
-            <a href="https://example.com/game3" target="_blank">
-                <img src="https://i.postimg.cc/nrd071xM/The-Last-of-Us-2.webp" alt="لعبة 3">
-                <div class="game-name"> The Last of Us Part II</div>
-            </a>
-        </div>
-        <!-- لعبة 4 -->
-        <div class="game-item">
-            <a href="https://example.com/game4" target="_blank">
-                <img src="https://i.postimg.cc/Hsx0vDqM/The-Shadow-of-the-Tomb-Raider-6.webp" alt="لعبة 4">
-                <div class="game-name">bommm </div>
-            </a>
-        </div>
-        <!-- لعبة 5 -->
-        <div class="game-item">
-            <a href="https://example.com/game5" target="_blank">
-                <img src="https://i.postimg.cc/MGw68WB6/Call-of-Duty-Black-Ops-6-2.jpg" alt="لعبة 5">
-                <div class="game-name">لعبة 5</div>
-            </a>
-        </div>
-        <!-- لعبة 6 -->
-        <div class="game-item">
-            <a href="https://example.com/game6" target="_blank">
-                <img src="https://i.blogs.es/0909e3/22d5eb03beb6c11b403050ac006039aa/1366_2000.jpeg" alt="لعبة 6">
-                <div class="game-name">لعبة 6</div>
-            </a>
-        </div>
-        <div class="game-item">
-            <a href="https://example.com/game1" target="_blank">
-                <img src="https://a.top4top.io/p_3195zke7i2.jpg" alt="لعبة 1">
-                <div class="game-name">لعبة 1</div>
-            </a>
-        </div>
-        <!-- لعبة 2 -->
-        <div class="game-item">
-            <a href="https://example.com/game2" target="_blank">
-                <img src="https://p4.wallpaperbetter.com/wallpaper/320/998/398/nathan-drake-uncharted-4-a-thiefs-end-best-games-of-2016-wallpaper-preview.jpg" alt="لعبة 2">
-                <div class="game-name">لعبة 2</div>
-            </a>
-        </div>
-        <!-- لعبة 3 -->
-        <div class="game-item">
-            <a href="https://example.com/game3" target="_blank">
-                <img src="https://i.postimg.cc/nrd071xM/The-Last-of-Us-2.webp" alt="لعبة 3">
-                <div class="game-name"> God of War Ragnarök</div>
-            </a>
-        </div>
-        <!-- لعبة 4 -->
-        <div class="game-item">
-            <a href="https://example.com/game4" target="_blank">
-                <img src="https://i.postimg.cc/Hsx0vDqM/The-Shadow-of-the-Tomb-Raider-6.webp" alt="لعبة 4">
-                <div class="game-name">لعبة 4</div>
-            </a>
-        </div>
-        <!-- لعبة 5 -->
-        <div class="game-item">
-            <a href="https://example.com/game5" target="_blank">
-                <img src="https://i.postimg.cc/MGw68WB6/Call-of-Duty-Black-Ops-6-2.jpg" alt="لعبة 5">
-                <div class="game-name">لعبة 5</div>
-            </a>
-        </div>
-        <!-- لعبة 6 -->
-        <div class="game-item">
-            <a href="https://example.com/game6" target="_blank">
-                <img src="https://i.blogs.es/0909e3/22d5eb03beb6c11b403050ac006039aa/1366_2000.jpeg" alt="لعبة 6">
-                <div class="game-name">لعبة 6</div>
-            </a>
-        </div>
-           <!-- لعبة 1 -->
-           <div class="game-item">
-            <a href="https://example.com/game1" target="_blank">
-                <img src="https://a.top4top.io/p_3195zke7i2.jpg" alt="لعبة 1">
-                <div class="game-name">God of War Ragnarök </div>
-            </a>
-        </div>
-        <!-- لعبة 2 -->
-        <div class="game-item">
-            <a href="https://example.com/game2" target="_blank">
-                <img src="https://p4.wallpaperbetter.com/wallpaper/320/998/398/nathan-drake-uncharted-4-a-thiefs-end-best-games-of-2016-wallpaper-preview.jpg" alt="لعبة 2">
-                <div class="game-name">Uncharted 4 A Thiefs End </div>
-            </a>
-        </div>
-        <!-- لعبة 3 -->
-        <div class="game-item">
-            <a href="https://example.com/game3" target="_blank">
-                <img src="https://i.postimg.cc/nrd071xM/The-Last-of-Us-2.webp" alt="لعبة 3">
-                <div class="game-name"> The Last of Us Part II</div>
-            </a>
-        </div>
-        <!-- لعبة 4 -->
-        <div class="game-item">
-            <a href="https://example.com/game4" target="_blank">
-                <img src="https://i.postimg.cc/Hsx0vDqM/The-Shadow-of-the-Tomb-Raider-6.webp" alt="لعبة 4">
-                <div class="game-name">لعبة 4</div>
-            </a>
-        </div>
-        <!-- لعبة 5 -->
-        <div class="game-item">
-            <a href="https://example.com/game5" target="_blank">
-                <img src="https://i.postimg.cc/MGw68WB6/Call-of-Duty-Black-Ops-6-2.jpg" alt="لعبة 5">
-                <div class="game-name">لعبة 5</div>
-            </a>
-        </div>
-        <!-- لعبة 6 -->
-        <div class="game-item">
-            <a href="https://example.com/game6" target="_blank">
-                <img src="https://i.blogs.es/0909e3/22d5eb03beb6c11b403050ac006039aa/1366_2000.jpeg" alt="لعبة 6">
-                <div class="game-name">لعبة 6</div>
-            </a>
-        </div>
-        <div class="game-item">
-            <a href="https://example.com/game1" target="_blank">
-                <img src="https://a.top4top.io/p_3195zke7i2.jpg" alt="لعبة 1">
-                <div class="game-name">لعبة 1</div>
-            </a>
-        </div>
-        <!-- لعبة 2 -->
-        <div class="game-item">
-            <a href="https://example.com/game2" target="_blank">
-                <img src="https://p4.wallpaperbetter.com/wallpaper/320/998/398/nathan-drake-uncharted-4-a-thiefs-end-best-games-of-2016-wallpaper-preview.jpg" alt="لعبة 2">
-                <div class="game-name">لعبة 2</div>
-            </a>
-        </div>
-        <!-- لعبة 3 -->
-        <div class="game-item">
-            <a href="https://example.com/game3" target="_blank">
-                <img src="https://i.postimg.cc/nrd071xM/The-Last-of-Us-2.webp" alt="لعبة 3">
-                <div class="game-name"> God of War Ragnarök</div>
-            </a>
-        </div>
-        <!-- لعبة 4 -->
-        <div class="game-item">
-            <a href="https://example.com/game4" target="_blank">
-                <img src="https://i.postimg.cc/Hsx0vDqM/The-Shadow-of-the-Tomb-Raider-6.webp" alt="لعبة 4">
-                <div class="game-name">لعبة 4</div>
-            </a>
-        </div>
-        <!-- لعبة 5 -->
-        <div class="game-item">
-            <a href="https://example.com/game5" target="_blank">
-                <img src="https://i.postimg.cc/MGw68WB6/Call-of-Duty-Black-Ops-6-2.jpg" alt="لعبة 5">
-                <div class="game-name">لعبة 5</div>
-            </a>
-        </div>
-        <!-- لعبة 6 -->
-        <div class="game-item">
-            <a href="https://example.com/game6" target="_blank">
-                <img src="https://i.blogs.es/0909e3/22d5eb03beb6c11b403050ac006039aa/1366_2000.jpeg" alt="لعبة 6">
-                <div class="game-name">call</div>
-            </a>
-        </div>
-    </div>
-    <div class="search-results-container" id="searchResults" style="display:none;">
-        <h3 style="color:#ffaa33; margin:10px 0;">نتائج البحث</h3>
-        <div class="games-container" id="resultsContainer"></div>
-        <button onclick="resetSearch()" class="copy-btn">عرض جميع الألعاب</button>
-      </div>
-    <div id="pagination"></div>
-
-</footer>
-<footer class="footer">
-<div style="text-align: center; margin-top: 20px;">
-<a href="https://web.facebook.com/share/v/1BRSsTQf57/" target="_blank">
-    <img src="https://img.icons8.com/?size=100&id=uLWV5A9vXIPu&format=png&color=000000" alt="Facebook" width="40">
-
-<a href="https://www.youtube.com/@mustafahanyf" target="_blank" style="margin: 0 10px;">
-    <img src="https://img.icons8.com/?size=100&id=19318&format=png&color=000000" alt="YouTube" width="40">
-
-<a href="https://t.me/GOLDHEN198" target="_blank">
-    <img src="https://img.icons8.com/?size=100&id=oWiuH0jFiU0R&format=png&color=000000" alt="Telegram" width="40">
-</div>
-</div>
-</div>
-<footer class="footer">
-<div class="footer-links">
-    <a href="terms.html">اتفاقية الاستخدام</a>
-    <a href="privacy.html">سياسة الخصوصية</a>
-    <a href="about.html">من نحن</a>
-    <a href="contact.html">اتصل بنا</a>
-</div>
-</div>
-</footer>
-<footer class="footer">
-<div className="text-sm">Copyright &copy; 2025 | by Hanyf Mustafa</div>
-</div>
-<button id="backToTop" class="back-to-top">🔝</button>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  
-    
-    <!-- Swiper JS -->
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script>
-  // ==============================
-// 1. إعداد المتغيرات العامة
-// ==============================
-const gameItems = document.querySelectorAll('.game-item');
-const itemsPerPage = 18;
-const paginationContainer = document.getElementById('pagination');
-const searchInput = document.getElementById('searchInput');
-const gamesContainer = document.querySelector('.games-container');
-const heroSlider = document.querySelector('.hero-slider');
-let currentPage = 1;
-const totalPages = Math.ceil(gameItems.length / itemsPerPage);
-
-// ==============================
-// 2. عرض الألعاب حسب الصفحة
-// ==============================
-function showPage(page) {
-  gameItems.forEach((item, index) => {
-    item.style.display = (index >= (page - 1) * itemsPerPage && index < page * itemsPerPage) ? 'block' : 'none';
-  });
-
-  document.querySelectorAll('.pagination button.page-btn').forEach((btn, index) => {
-    btn.classList.toggle('active', index + 1 === page);
-  });
-
-  document.getElementById('prevBtn').disabled = page === 1;
-  document.getElementById('nextBtn').disabled = page === totalPages;
-
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-// ==============================
-// 3. إنشاء أزرار الترقيم (Pagination)
-// ==============================
-function createPagination() {
-  paginationContainer.innerHTML = '';
-
-  const paginationDiv = document.createElement('div');
-  paginationDiv.className = 'pagination';
-
-  const prevBtn = document.createElement('button');
-  prevBtn.textContent = '«';
-  prevBtn.id = 'prevBtn';
-  prevBtn.addEventListener('click', () => {
-    if (currentPage > 1) showPage(--currentPage);
-  });
-  paginationDiv.appendChild(prevBtn);
-
-  for (let i = 1; i <= totalPages; i++) {
-    const btn = document.createElement('button');
-    btn.textContent = i;
-    btn.className = 'page-btn';
-    if (i === 1) btn.classList.add('active');
-    btn.addEventListener('click', () => {
-      currentPage = i;
-      showPage(currentPage);
-    });
-    paginationDiv.appendChild(btn);
-  }
-
-  const nextBtn = document.createElement('button');
-  nextBtn.textContent = '»';
-  nextBtn.id = 'nextBtn';
-  nextBtn.addEventListener('click', () => {
-    if (currentPage < totalPages) showPage(++currentPage);
-  });
-  paginationDiv.appendChild(nextBtn);
-
-  paginationContainer.appendChild(paginationDiv);
-}
-
-// ==============================
-// 4. البحث في الألعاب مع تنسيق النتائج
-// ==============================
-function searchGames(keyword) {
-  const container = document.querySelector('.games-container');
-  const matchedGames = [];
-
-  gameItems.forEach(game => {
-    const gameName = game.querySelector('.game-name').textContent.toLowerCase();
-    if (gameName.includes(keyword)) {
-      game.classList.add('found');
-      matchedGames.push(game);
-    } else {
-      game.classList.remove('found');
+      </section>
+      <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+      <script>
+       // بيانات الألعاب
+  const games = [
+    {
+      title: "God of War — مترجمة",
+      image: "https://a.top4top.io/p_3195zke7i2.jpg",
+      link: "https://example.com/god-of-war"
+    },
+    {
+      title: "Uncharted 4 — كاملة",
+      image: "https://p4.wallpaperbetter.com/wallpaper/320/998/398/nathan-drake-uncharted-4-a-thiefs-end-best-games-of-2016-wallpaper-preview.jpg",
+      link: "https://example.com/uncharted-4"
+    },
+    {
+      title: "The Last of Us 2 — مدبلجة",
+      image: "https://i.postimg.cc/nrd071xM/The-Last-of-Us-2.webp",
+      link: "https://example.com/the-last-of-us-2"
     }
-  });
-
-  container.classList.remove('found-1', 'found-2', 'found-3plus');
-  if (window.innerWidth > 768) {
-    if (matchedGames.length === 1) {
-      container.classList.add('found-1');
-      matchedGames[0].style.margin = '0 auto';
-    } else if (matchedGames.length === 2) {
-      container.classList.add('found-2');
-      matchedGames.forEach(game => game.style.margin = '0 auto');
-    } else if (matchedGames.length >= 3) {
-      container.classList.add('found-3plus');
-      matchedGames.forEach(game => game.style.margin = '0');
+    ,
+    {
+      title: "Shadow of the Tomb Raider — مترجمة",
+      image: "https://i.postimg.cc/Hsx0vDqM/The-Shadow-of-the-Tomb-Raider-6.webp",
+      link: "https://example.com/shadow-of-the-tomb-raider"
+    },
+    {
+      title: "Call of Duty: Black Ops 4 — كاملة",
+      image: "https://i.postimg.cc/MGw68WB6/Call-of-Duty-Black-Ops-6-2.jpg",
+      link: "https://example.com/call-of-duty-black-ops-4"
+    },
+    {
+      title: "Call of Duty: Black Ops 4 — كاملة",
+      image: "https://i.postimg.cc/MGw68WB6/Call-of-Duty-Black-Ops-6-2.jpg",
+      link: "https://example.com/call-of-duty-black-ops-4"
+    },
+    {
+      title: "Call of Duty: Black Ops 4 — كاملة",
+      image: "https://i.postimg.cc/MGw68WB6/Call-of-Duty-Black-Ops-6-2.jpg",
+      link: "https://example.com/call-of-duty-black-ops-4"
+    },
+    {
+      title: "Call of Duty: Black Ops 4 — كاملة",
+      image: "https://i.postimg.cc/MGw68WB6/Call-of-Duty-Black-Ops-6-2.jpg",
+      link: "https://example.com/call-of-duty-black-ops-4"
     }
-  }
-}
+  ];
 
-// ==============================
-// 5. تشغيل البحث مع إظهار/إخفاء السلايدر بأنيميشن
-// ==============================
-searchInput.addEventListener('input', function() {
-  gamesContainer.scrollIntoView({ behavior: 'smooth' });
-  const searchValue = this.value.toLowerCase();
+  // توليد السلايدر ومكتبة الألعاب
+const sliderContent = document.getElementById('sliderContent');
+const gamesGrid = document.querySelector('.library-games-grid');
 
-  gameItems.forEach(item => {
-    const title = item.querySelector('.game-name').textContent.toLowerCase();
-    item.style.display = title.includes(searchValue) ? 'block' : 'none';
+games.forEach(game => {
+  // شريحة السلايدر
+  const slide = document.createElement('div');
+  slide.className = 'swiper-slide';
+  slide.innerHTML = `
+    <img src="${game.image}" alt="${game.title}">
+    <div class="slide-overlay">
+      <h2>${game.title}</h2>
+      <a href="${game.link}" class="download-btn" target="_blank">تحميل مباشر</a>
+    </div>
+  `;
+  sliderContent.appendChild(slide);
+
+  // كارت اللعبة في المكتبة
+  const gameBox = document.createElement('div');
+    gameBox.className = 'game-container';
+    gameBox.innerHTML = `
+      <a href="${game.link}" target="_blank">
+        <img src="${game.image}" alt="${game.title}">
+      </a>
+      <h3>${game.title}</h3>
+    `;
+    gamesGrid.appendChild(gameBox);
   });
-
-  // تحريك السلايدر عند الإظهار/الإخفاء
-  if (searchValue.trim() !== "") {
-    heroSlider.style.display = 'none';
-  } else {
-    // لو مافيه بحث — نظهر السلايدر ونرجع ترتيب الألعاب الطبيعي
-    heroSlider.style.display = 'block';
-    showPage(currentPage);
-  }
-  if (searchValue.trim() !== "") {
-  heroSlider.style.display = 'none';
-  paginationContainer.style.display = 'none';  // اخفاء الترقيم أثناء البحث
-} else {
-  heroSlider.style.display = 'block';
-  paginationContainer.style.display = 'block';  // إظهار الترقيم
-  showPage(currentPage);
-}
-});
-
-// ==============================
-// 6. تحريك صور الألعاب عند التمرير عليها
-// ==============================
-gameItems.forEach(item => {
-  item.addEventListener('mouseenter', () => item.style.transform = 'scale(0.9)');
-  item.addEventListener('mouseleave', () => item.style.transform = 'scale(1)');
-});
-
-// ==============================
-// 7. إعداد القائمة والبحث (الهيدر)
-// ==============================
-const searchIcon = document.querySelector('.search-icon');
-const searchBox = document.querySelector('.search-box');
-const menuToggle = document.querySelector('.menu-toggle');
-const navbar = document.querySelector('.navbar');
-searchIcon.addEventListener('click', (e) => {
-  e.stopPropagation();
-  searchBox.classList.toggle('show');
-
-  // لو ظهر صندوق البحث — يركز المؤشر
-  if (searchBox.classList.contains('show')) {
-    searchInput.focus();
-  }
-});
-
-// عند الضغط في أي مكان خارج الصندوق أو الأيقونة — يغلق
-document.addEventListener('click', (e) => {
-  if (!searchBox.contains(e.target) && !searchIcon.contains(e.target)) {
-    searchBox.classList.remove('show');
-  }
-});
-// ==============================
-// 8. إعداد سلايدر Swiper
-// ==============================
+// إعداد السلايدر
 new Swiper('.hero-slider', {
   loop: true,
+  effect: 'fade',
+  fadeEffect: { crossFade: true },
   autoplay: { delay: 4000, disableOnInteraction: false },
   navigation: {
     nextEl: '.swiper-button-next',
     prevEl: '.swiper-button-prev',
   },
 });
+</script>
 
-new Swiper('.latest-games-slider', {
-  slidesPerView: 2,
-  spaceBetween: 10,
-  loop: true,
-  autoplay: { delay: 2500, disableOnInteraction: false },
-  breakpoints: {
-    768: { slidesPerView: 4 },
-    1024: { slidesPerView: 6 }
-  }
-});
-
-// ==============================
-// 9. زر العودة للأعلى
-// ==============================
-window.onscroll = () => {
-  if (document.documentElement.scrollTop > 300) {
-    $("#backToTop").fadeIn();
-  } else {
-    $("#backToTop").fadeOut();
-  }
-};
-
-$("#backToTop").click(() => {
-  $("html, body").animate({ scrollTop: 0 }, "smooth");
-});
-
-// ==============================
-// 10. دالة خلط الألعاب
-// ==============================
-function shuffleArray(array) {
-  let newArray = array.slice();
-  for (let i = newArray.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
-  }
-  return newArray;
-}
-
-// ==============================
-// 11. تشغيل النظام
-// ==============================
-createPagination();
-showPage(currentPage);
-
-
-    </script>
 </body>
 </html>
