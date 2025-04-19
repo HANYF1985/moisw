@@ -831,7 +831,7 @@ const pageNumbers = document.getElementById('pageNumbers');
 const searchInput = document.getElementById('searchInput');
 const searchIcon = document.querySelector('.search-icon');
 const searchBox = document.querySelector('.search-box');
-const searchButton = document.getElementById('searchButton');
+const backToTopButton = document.getElementById('backToTop');
 
 // 3. توليد السلايدر لآخر 10 ألعاب
 games.slice(-gamesPerPage).forEach(game => {
@@ -910,13 +910,13 @@ function renderPageNumbers() {
   }
 }
 
-// 7. تحديث حالة الأزرار (السابق/التالي)
+// 7. تحديث حالة الأزرار
 function updateButtons() {
   prevBtn.disabled = currentPage === 1;
   nextBtn.disabled = currentPage === Math.ceil(displayedGames.length / gamesPerPage);
 }
 
-// 8. أزرار التنقل بين الصفحات
+// 8. أزرار التنقل
 nextBtn.addEventListener('click', () => {
   if (currentPage < Math.ceil(displayedGames.length / gamesPerPage)) {
     currentPage++;
@@ -931,7 +931,7 @@ prevBtn.addEventListener('click', () => {
   }
 });
 
-// 9. تأثير hover عند مرور الماوس على الكروت
+// 9. تأثير hover
 function addHoverEffects() {
   const gameContainers = document.querySelectorAll('.game-container');
   gameContainers.forEach(container => {
@@ -946,7 +946,7 @@ function addHoverEffects() {
   });
 }
 
-// 10. تأثير ظهور الألعاب في Top Games
+// 10. تأثير ظهور الألعاب
 function observeTopGames() {
   const topGameCards = document.querySelectorAll('.top-games .game-card');
   const observer = new IntersectionObserver(entries => {
@@ -956,73 +956,64 @@ function observeTopGames() {
       }
     });
   }, { threshold: 0.3 });
-
   topGameCards.forEach(card => observer.observe(card));
 }
 
-// 11. أول تحميل للمحتوى حسب البحث
-window.addEventListener('DOMContentLoaded', () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const query = urlParams.get('search');
-
-  if (query) {
-    searchInput.value = query;
-    const filteredGames = games.filter(game => game.title.toLowerCase().includes(query.toLowerCase()));
-    renderGames(filteredGames);
-  } else {
-    renderGames(games);
-  }
-});
-
-// 12. إعداد تأثير العودة للأعلى
+// 11. تأثير العودة للأعلى
 window.addEventListener('scroll', () => {
-  const backToTopButton = document.getElementById('backToTop');
-  if (window.scrollY > 300) {
-    backToTopButton.style.display = 'block';
-  } else {
-    backToTopButton.style.display = 'none';
-  }
+  backToTopButton.style.display = window.scrollY > 300 ? 'block' : 'none';
 });
 
-document.getElementById('backToTop').addEventListener('click', () => {
+backToTopButton.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// 13. إعداد صندوق البحث
+// 12. صندوق البحث
 searchIcon.addEventListener('click', (e) => {
   e.stopPropagation();
   searchBox.classList.toggle('show');
   if (searchBox.classList.contains('show')) {
     searchInput.focus();
+    if (window.innerWidth <= 768) {
+      document.body.classList.add('search-active');
+    }
   }
 });
 
 document.addEventListener('click', (e) => {
   if (!searchBox.contains(e.target) && !searchIcon.contains(e.target)) {
     searchBox.classList.remove('show');
+    document.body.classList.remove('search-active');
   }
 });
 
-// 14. تشغيل البحث عند الضغط على Enter
+// 13. البحث مع إعادة تحميل الصفحة
 searchInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') {
     e.preventDefault();
     const query = searchInput.value.trim();
     if (query !== '') {
-      window.location.search = `?search=${encodeURIComponent(query)}`;
+      window.location.href = window.location.pathname + '?search=' + encodeURIComponent(query);
     }
   }
 });
 
-// 15. تشغيل البحث عند الضغط على زر البحث
-if (searchButton) {
-  searchButton.addEventListener('click', () => {
-    const query = searchInput.value.trim();
-    if (query !== '') {
-      window.location.search = `?search=${encodeURIComponent(query)}`;
+// 14. تحميل نتائج البحث عند فتح الصفحة
+window.addEventListener('load', () => {
+  const params = new URLSearchParams(window.location.search);
+  const query = params.get('search');
+  if (query) {
+    searchInput.value = query;
+    const filteredGames = games.filter(game => game.title.toLowerCase().includes(query.toLowerCase()));
+    currentPage = 1;
+    renderGames(filteredGames);
+    if (window.innerWidth <= 768) {
+      document.body.classList.add('search-active');
     }
-  });
-}
+  } else {
+    renderGames();
+  }
+});
 
 
 </script>
