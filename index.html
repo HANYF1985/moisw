@@ -1015,6 +1015,31 @@ window.addEventListener('load', () => {
   }
 });
 
+// 15. مسح الكتابة عند ظهور النتائج (الهاتف والحاسوب)
+window.addEventListener('load', () => {
+  if (window.innerWidth <= 768) {
+    const query = searchInput.value.trim();
+    if (query !== '') {
+      searchInput.value = ''; // مسح الكتابة
+    }
+  }
+});
+
+// 16. ضبط الفوكيس عند الهاتف فقط
+searchInput.addEventListener('focus', () => {
+  if (window.innerWidth <= 768) {
+    searchInput.select();
+  }
+});
+
+// 17. استرجاع شكل الصفحة عند العودة
+window.addEventListener('pageshow', () => {
+  if (window.innerWidth <= 768) {
+    searchInput.value = ''; // مسح الكتابة عند العودة للصفحة
+    searchBox.classList.remove('show');
+    document.body.classList.remove('search-active');
+  }
+});
 
 </script>
 </body>
