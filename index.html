@@ -257,6 +257,7 @@
   color: #fff;
   margin-bottom: 15px;
   margin-top:0px ;
+  text-decoration: none;
 }
 
 .games-grid {
@@ -270,7 +271,7 @@
   background: #2a2a3d;
   border-radius: 8px;
   overflow: hidden;
-  width: 200px;
+  width: 160px;
   transition: transform 0.3s;
 }
 
@@ -302,22 +303,30 @@
 }
 
 .news-ticker {
-  background-color: #e68900;
-  color: #1c1c2e;
-  font-weight: bold;
-  padding: 8px 0;
-  font-size: 14px;
-}
-.widget-games {
-  background: #1c1c2e;
-  padding: 60px 20px; /* زيادة التباعد الداخلي في الأعلى والأسفل */
-  border-radius: 15px;
-  width: 100%;
-  max-width: 1360px;
-  margin: 20px auto;
-  
+    background-color: #0e1329;
+color: #fff;
+padding: 8px 0;
+overflow: hidden;
+position: relative;
+top: 0;
+width: 100%;
+white-space: nowrap;
+font-size: 16px;
+z-index: 9999;
+border-top: 2px solid #ff6600;   /* ✅ الحد من الأعلى */
+border-bottom: 2px solid #ff6600;
+margin-top: 0px;
 }
 
+
+.widget-games {
+  background: #1c1c2e;
+  padding: 30px 20px; /* قللنا التباعد الداخلي */
+  border-radius: 15px;
+  width: 70%;
+  max-width: 1360px;
+  margin: 10px auto; /* قللنا المسافة الخارجية */
+}
 
 .widget-title h2 {
   font-size: 28px; /* حجم العنوان */
@@ -339,16 +348,34 @@
   margin: 0 auto;  /* التأكد من المحاذاة الوسط */
 
 }
-
 .game-container {
   background: #2a2a3d;
   border-radius: 10px;
   padding: 10px;
   box-shadow: 0px 0px 6px 7px rgba(0, 0, 0, 0.3);
   border-width: 10px 10px 30px 10px;
-  transition: transform 0.9s ease, box-shadow 0.9s ease;
-  
+  transform: translateY(20px);
+  opacity: 0;
+  transition: transform 0.5s ease, box-shadow 0.5s ease, opacity 0.5s ease;
 }
+
+.game-container.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.game-container:hover {
+  transform: translateY(0) scale(1.05);
+}
+.game-container.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.game-container:hover {
+  transform: translateY(0) scale(1.05);
+}
+
 .game-container:hover {
   box-shadow: 0px 0px 14px 12px rgba(255, 183, 0, 0.512);  /* ظل أصفر عند مرور الفأرة */
 }
@@ -361,10 +388,13 @@
 }
 .game-container {
   transition: 0.3s;
+  
+  
 }
 .game-container:hover {
   transform: scale(0.95);
 }
+
 
 .game-container h3 {
   font-size: 18px; /* حجم العنوان داخل الحاوية */
@@ -379,7 +409,153 @@
   padding-top: 20px;
   padding-bottom: 20px; /* تباعد سفلي إضافي */
 }
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
+.game-card {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.game-card.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.game-container {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.game-container.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* حاوية التنقل */
+.pagination {
+  display: flex;
+  justify-content: center; /* تمركز الأرقام في المنتصف */
+  align-items: center;
+  margin-top: 20px;
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px; /
+}
+
+/* زر "السابق" و "التالي" */
+.pagination button {
+  padding: 5px;
+  background-color: gray;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  display: inline-block;
+}
+
+/* الزر "النشط" */
+.pagination button.active {
+  background-color: #e68900;
+}
+
+/* الأرقام في المنتصف */
+#pageNumbers {
+  display: flex;
+  justify-content: center; /* تمركز الأرقام في المنتصف */
+  align-items: center;
+  margin: 0 10px; /* مسافة بين الأزرار */
+}
+
+/* أرقام الصفحات */
+#pageNumbers button {
+  margin: 0 5px; /* مسافة بين الأزرار */
+  padding: 5px 10px;
+  background-color: gray;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* تمييز الصفحة الحالية */
+#pageNumbers button.active {
+  background-color: #e68900;
+}
+
+/* ترتيب الأزرار */
+#prevBtn {
+  margin-right: auto; /* تحريك الزر "السابق" لليسار */
+}
+
+#nextBtn {
+  margin-left: auto; /* تحريك الزر "التالي" لليمين */
+}
+
+.back-to-top {
+position: fixed;
+bottom: 20px;
+right: 20px;
+width: 50px;
+height: 50px;
+background-color: #007bff;
+color: white;
+border: none;
+border-radius: 50%;
+font-size: 20px;
+cursor: pointer;
+display: none; /* مخفي افتراضياً */
+align-items: center;
+justify-content: center;
+transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.back-to-top:hover {
+background-color: #0056b3;
+transform: scale(1.1);
+}
+
+
+.footer {
+background-color: #0e1329; /* خلفية داكنة */
+padding: 3px;
+text-align: center;
+text-decoration: none;
+}
+
+.footer-links a {
+color: white; /* لون النص أبيض */
+font-size: 18px; /* حجم الخط */
+font-weight: bold; /* جعل النص عريض */
+text-decoration: none; /* إزالة الخط السفلي */
+margin: 0 10px; /* تباعد بين الروابط */
+}
+
+.footer-links a:hover {
+color: #e03e00; /* تغيير اللون عند التمرير */
+text-decoration: none;
+}
  </style>
 </head>
 <body>
@@ -429,10 +605,11 @@
 
       </div>
       <section class="top-games">
-        <h2>🔥 Top Games</h2>
+        <h2> Top Games</h2>
         <div class="games-grid">
           <!-- لعبة 1 -->
           <div class="game-card">
+            <a href="https://example.com/god-of-war" target="_blank"> </a>
             <img src="https://a.top4top.io/p_3195zke7i2.jpg" alt="لعبة 1">
             <h3>لعبة 1</h3>
             <div class="stars">
@@ -446,7 +623,8 @@
       
           <!-- لعبة 2 -->
           <div class="game-card">
-            <img src="https://p4.wallpaperbetter.com/wallpaper/320/998/398/nathan-drake-uncharted-4-a-thiefs-end-best-games-of-2016-wallpaper-preview.jpg" alt="لعبة 2">
+            <a href="https://example.com/god-of-war" target="_blank">
+            <img src="https://p4.wallpaperbetter.com/wallpaper/320/998/398/nathan-drake-uncharted-4-a-thiefs-end-best-games-of-2016-wallpaper-preview.jpg" alt="لعبة 2"> </a>
             <h3>لعبة 2</h3>
             <div class="stars">
               <i class="fas fa-star"></i>
@@ -459,7 +637,8 @@
       
           <!-- لعبة 3 -->
           <div class="game-card">
-            <img src="https://i.postimg.cc/nrd071xM/The-Last-of-Us-2.webp" alt="لعبة 3">
+            <a href="https://example.com/god-of-war" target="_blank">
+            <img src="https://i.postimg.cc/nrd071xM/The-Last-of-Us-2.webp" alt="لعبة 3"> </a>
             <h3>لعبة 3</h3>
             <div class="stars">
               <i class="fas fa-star"></i>
@@ -472,7 +651,8 @@
       
           <!-- لعبة 4 -->
           <div class="game-card">
-            <img src="https://i.postimg.cc/Hsx0vDqM/The-Shadow-of-the-Tomb-Raider-6.webp" alt="لعبة 4">
+            <a href="https://example.com/god-of-war" target="_blank">
+            <img src="https://i.postimg.cc/Hsx0vDqM/The-Shadow-of-the-Tomb-Raider-6.webp" alt="لعبة 4"> </a>
             <h3>لعبة 4</h3>
             <div class="stars">
               <i class="fas fa-star"></i>
@@ -485,7 +665,8 @@
       
           <!-- لعبة 5 -->
           <div class="game-card">
-            <img src="https://i.postimg.cc/MGw68WB6/Call-of-Duty-Black-Ops-6-2.jpg" alt="لعبة 5">
+            <a href="https://example.com/god-of-war" target="_blank">
+            <img src="https://i.postimg.cc/MGw68WB6/Call-of-Duty-Black-Ops-6-2.jpg" alt="لعبة 5"> </a>
             <h3>لعبة 5</h3>
             <div class="stars">
               <i class="fas fa-star"></i>
@@ -504,7 +685,7 @@
       </div>
       <section class="widget-games">
         <div class="widget-title">
-          <h2>🎮 أفضل الألعاب</h2>
+          <h2> أفضل الألعاب</h2>
         </div>
         <div class="widget-content">
           <div class="library-games-grid">
@@ -512,10 +693,86 @@
           <!-- سيتم توليد الألعاب هنا -->
         </div>
       </section>
+      <div class="pagination">
+        <button id="prevBtn">السابق</button>
+        <div id="pageNumbers"></div>
+        <button id="nextBtn">التالي</button>
+        <button id="backToTop" class="back-to-top">🔝</button>
+
+      </div>
+    </footer>
+    <footer class="footer">
+    <div style="text-align: center; margin-top: 20px;">
+    <a href="https://web.facebook.com/share/v/1BRSsTQf57/" target="_blank">
+        <img src="https://img.icons8.com/?size=100&id=uLWV5A9vXIPu&format=png&color=000000" alt="Facebook" width="40">
+    
+    <a href="https://www.youtube.com/@mustafahanyf" target="_blank" style="margin: 0 10px;">
+        <img src="https://img.icons8.com/?size=100&id=19318&format=png&color=000000" alt="YouTube" width="40">
+    
+    <a href="https://t.me/GOLDHEN198" target="_blank">
+        <img src="https://img.icons8.com/?size=100&id=oWiuH0jFiU0R&format=png&color=000000" alt="Telegram" width="40">
+    </div>
+    </div>
+    </div>
+    <footer class="footer">
+    <div class="footer-links">
+        <a href="terms.html">اتفاقية الاستخدام</a>
+        <a href="privacy.html">سياسة الخصوصية</a>
+        <a href="about.html">من نحن</a>
+        <a href="contact.html">اتصل بنا</a>
+    </div>
+    </div>
+    </footer>
+    <footer class="footer">
+    <div className="text-sm">Copyright &copy; 2025 | by Hanyf Mustafa</div>
+    </div>
       <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       <script>
-       // بيانات الألعاب
-  const games = [
+        
+      // بيانات الألعاب مع إضافة التصنيف والوصف والتقييم
+const games = [
+    {
+      title: "God of War — مترجمة",
+      image: "https://a.top4top.io/p_3195zke7i2.jpg",
+      link: "https://example.com/god-of-war"
+    },
+    {
+      title: "Uncharted 4 — كاملة",
+      image: "https://p4.wallpaperbetter.com/wallpaper/320/998/398/nathan-drake-uncharted-4-a-thiefs-end-best-games-of-2016-wallpaper-preview.jpg",
+      link: "https://example.com/uncharted-4"
+    },
+    {
+      title: "The Last of Us 2 — مدبلجة",
+      image: "https://i.postimg.cc/nrd071xM/The-Last-of-Us-2.webp",
+      link: "https://example.com/the-last-of-us-2"
+    }
+    ,
+    {
+      title: "Shadow of the Tomb Raider — مترجمة",
+      image: "https://i.postimg.cc/Hsx0vDqM/The-Shadow-of-the-Tomb-Raider-6.webp",
+      link: "https://example.com/shadow-of-the-tomb-raider"
+    },
+    {
+      title: "Call of Duty: Black Ops 4 — كاملة",
+      image: "https://i.postimg.cc/MGw68WB6/Call-of-Duty-Black-Ops-6-2.jpg",
+      link: "https://example.com/call-of-duty-black-ops-4"
+    },
+    {
+      title: "Call of Duty: Black Ops 4 — كاملة",
+      image: "https://i.postimg.cc/MGw68WB6/Call-of-Duty-Black-Ops-6-2.jpg",
+      link: "https://example.com/call-of-duty-black-ops-4"
+    },
+    {
+      title: "Call of Duty: Black Ops 4 — كاملة",
+      image: "https://i.postimg.cc/MGw68WB6/Call-of-Duty-Black-Ops-6-2.jpg",
+      link: "https://example.com/call-of-duty-black-ops-4"
+    },
+    {
+      title: "Call of Duty: Black Ops 4 — كاملة",
+      image: "https://i.postimg.cc/MGw68WB6/Call-of-Duty-Black-Ops-6-2.jpg",
+      link: "https://example.com/call-of-duty-black-ops-4"
+    },
     {
       title: "God of War — مترجمة",
       image: "https://a.top4top.io/p_3195zke7i2.jpg",
@@ -558,13 +815,23 @@
       link: "https://example.com/call-of-duty-black-ops-4"
     }
   ];
+ // 1. إعدادات السلايدر والمكتبة
+const gamesPerPage = 10;
+let currentPage = 1;
+let displayedGames = games.slice();
 
-  // توليد السلايدر ومكتبة الألعاب
+// 2. عناصر HTML للمحتوى
 const sliderContent = document.getElementById('sliderContent');
 const gamesGrid = document.querySelector('.library-games-grid');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const pageNumbers = document.getElementById('pageNumbers');
+const searchInput = document.getElementById('searchInput');
+const searchIcon = document.querySelector('.search-icon');
+const searchBox = document.querySelector('.search-box');
 
-games.forEach(game => {
-  // شريحة السلايدر
+// 3. توليد السلايدر لآخر 10 ألعاب
+games.slice(-gamesPerPage).forEach(game => {
   const slide = document.createElement('div');
   slide.className = 'swiper-slide';
   slide.innerHTML = `
@@ -575,19 +842,9 @@ games.forEach(game => {
     </div>
   `;
   sliderContent.appendChild(slide);
+});
 
-  // كارت اللعبة في المكتبة
-  const gameBox = document.createElement('div');
-    gameBox.className = 'game-container';
-    gameBox.innerHTML = `
-      <a href="${game.link}" target="_blank">
-        <img src="${game.image}" alt="${game.title}">
-      </a>
-      <h3>${game.title}</h3>
-    `;
-    gamesGrid.appendChild(gameBox);
-  });
-// إعداد السلايدر
+// 4. إعداد السلايدر باستخدام Swiper.js
 new Swiper('.hero-slider', {
   loop: true,
   effect: 'fade',
@@ -598,7 +855,159 @@ new Swiper('.hero-slider', {
     prevEl: '.swiper-button-prev',
   },
 });
-</script>
 
+// 5. تحديث عرض الألعاب حسب الصفحة الحالية
+function renderGames(gamesToRender = null) {
+  if (gamesToRender) {
+    displayedGames = gamesToRender;
+  }
+  gamesGrid.innerHTML = '';
+  const startIndex = (currentPage - 1) * gamesPerPage;
+  const endIndex = startIndex + gamesPerPage;
+  const currentGames = displayedGames.slice(startIndex, endIndex);
+
+  currentGames.forEach((game, index) => {
+    const gameBox = document.createElement('div');
+    gameBox.className = 'game-container';
+    gameBox.innerHTML = `
+      <a href="${game.link}" target="_blank">
+        <img src="${game.image}" alt="${game.title}">
+      </a>
+      <h3>${game.title}</h3>
+    `;
+    gamesGrid.appendChild(gameBox);
+
+    setTimeout(() => {
+      gameBox.classList.add('show');
+      gameBox.style.transform = 'translateX(0)';
+      gameBox.style.opacity = '1';
+    }, index * 200);
+  });
+
+  renderPageNumbers();
+  updateButtons();
+  addHoverEffects();
+  observeTopGames();
+   // 🟠 الإضافة ↓↓↓↓↓↓↓↓↓
+   gamesGrid.scrollIntoView({ behavior: 'smooth' });
+}
+
+
+// 6. توليد أرقام الصفحات
+function renderPageNumbers() {
+  pageNumbers.innerHTML = '';
+  const pageCount = Math.ceil(displayedGames.length / gamesPerPage);
+
+  for (let i = 1; i <= pageCount; i++) {
+    const pageBtn = document.createElement('button');
+    pageBtn.textContent = i;
+    if (i === currentPage) pageBtn.classList.add('active');
+    pageBtn.addEventListener('click', () => {
+      currentPage = i;
+      renderGames();
+    });
+    pageNumbers.appendChild(pageBtn);
+  }
+}
+
+// 7. تحديث حالة الأزرار (السابق/التالي)
+function updateButtons() {
+  prevBtn.disabled = currentPage === 1;
+  nextBtn.disabled = currentPage === Math.ceil(displayedGames.length / gamesPerPage);
+}
+
+// 8. أزرار التنقل بين الصفحات
+nextBtn.addEventListener('click', () => {
+  if (currentPage < Math.ceil(displayedGames.length / gamesPerPage)) {
+    currentPage++;
+    renderGames();
+  }
+});
+
+prevBtn.addEventListener('click', () => {
+  if (currentPage > 1) {
+    currentPage--;
+    renderGames();
+  }
+});
+
+// 9. تأثير hover عند مرور الماوس على الكروت
+function addHoverEffects() {
+  const gameContainers = document.querySelectorAll('.game-container');
+  gameContainers.forEach(container => {
+    container.addEventListener('mouseenter', () => {
+      container.style.transform = 'scale(0.9)';
+      container.style.boxShadow = '0px 0px 15px 10px rgba(255, 165, 0, 0.5)';
+    });
+    container.addEventListener('mouseleave', () => {
+      container.style.transform = 'scale(1)';
+      container.style.boxShadow = '0px 0px 6px 7px rgba(0, 0, 0, 0.3)';
+    });
+  });
+}
+
+// 10. تأثير ظهور الألعاب في Top Games
+
+// 5. إعداد Intersection Observer لتأثير ظهور الألعاب
+function observeTopGames() {
+  const topGameCards = document.querySelectorAll('.top-games .game-card');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      }
+    });
+  }, { threshold: 0.3 });
+
+  topGameCards.forEach(card => observer.observe(card));
+}
+
+observeTopGames();
+
+// 11. أول تحميل للمحتوى
+renderGames();
+
+// 12. إعداد تأثير العودة للأعلى
+window.addEventListener('scroll', () => {
+  const backToTopButton = document.getElementById('backToTop');
+  if (window.scrollY > 300) {
+    backToTopButton.style.display = 'block';
+  } else {
+    backToTopButton.style.display = 'none';
+  }
+});
+
+document.getElementById('backToTop').addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// 13. إعداد صندوق البحث
+searchIcon.addEventListener('click', (e) => {
+  e.stopPropagation();
+  searchBox.classList.toggle('show');
+  if (searchBox.classList.contains('show')) {
+    searchInput.focus();
+  }
+});
+
+document.addEventListener('click', (e) => {
+  if (!searchBox.contains(e.target) && !searchIcon.contains(e.target)) {
+    searchBox.classList.remove('show');
+  }
+});
+
+// 14. البحث الحي
+searchInput.addEventListener('input', () => {
+  const query = searchInput.value.toLowerCase();
+  const filteredGames = games.filter(game => game.title.toLowerCase().includes(query));
+  currentPage = 1;
+  if (query.trim() === '') {
+    renderGames(games);
+  } else {
+    renderGames(filteredGames);
+  }
+});
+
+</script>
 </body>
 </html>
