@@ -556,6 +556,7 @@ margin: 0 10px; /* تباعد بين الروابط */
 color: #e03e00; /* تغيير اللون عند التمرير */
 text-decoration: none;
 }
+
  </style>
 </head>
 <body>
@@ -888,8 +889,11 @@ function renderGames(gamesToRender = null) {
   updateButtons();
   addHoverEffects();
   observeTopGames();
-   // 🟠 الإضافة ↓↓↓↓↓↓↓↓↓
-   gamesGrid.scrollIntoView({ behavior: 'smooth' });
+
+  // ✅ Scroll تلقائي فقط في الشاشات الكبيرة
+  if (window.innerWidth > 768) {
+    gamesGrid.scrollIntoView({ behavior: 'smooth' });
+  }
 }
 
 
