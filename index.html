@@ -591,6 +591,7 @@ text-decoration: none;
 
                 <i class="fas fa-search search-icon"></i>
                 <input type="text" id="searchInput" placeholder="بحث..." class="search-box hidden">
+                <button id="searchButton">بحث</button>
             </div>
             
         </div>
@@ -816,7 +817,7 @@ const games = [
       link: "https://example.com/call-of-duty-black-ops-4"
     }
   ];
- // 1. إعدادات السلايدر والمكتبة
+// 1. إعدادات السلايدر والمكتبة
 const gamesPerPage = 10;
 let currentPage = 1;
 let displayedGames = games.slice();
@@ -830,6 +831,7 @@ const pageNumbers = document.getElementById('pageNumbers');
 const searchInput = document.getElementById('searchInput');
 const searchIcon = document.querySelector('.search-icon');
 const searchBox = document.querySelector('.search-box');
+const searchButton = document.getElementById('searchButton');
 
 // 3. توليد السلايدر لآخر 10 ألعاب
 games.slice(-gamesPerPage).forEach(game => {
@@ -889,13 +891,7 @@ function renderGames(gamesToRender = null) {
   updateButtons();
   addHoverEffects();
   observeTopGames();
-
-  // ✅ Scroll تلقائي فقط في الشاشات الكبيرة
-  if (window.innerWidth > 768) {
-    gamesGrid.scrollIntoView({ behavior: 'smooth' });
-  }
 }
-
 
 // 6. توليد أرقام الصفحات
 function renderPageNumbers() {
@@ -951,8 +947,6 @@ function addHoverEffects() {
 }
 
 // 10. تأثير ظهور الألعاب في Top Games
-
-// 5. إعداد Intersection Observer لتأثير ظهور الألعاب
 function observeTopGames() {
   const topGameCards = document.querySelectorAll('.top-games .game-card');
   const observer = new IntersectionObserver(entries => {
@@ -1000,7 +994,20 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// 14. البحث الحي
+// 14. البحث الحي مع زر بحث
+function executeSearch() {
+  const query = searchInput.value.toLowerCase();
+  const filteredGames = games.filter(game => game.title.toLowerCase().includes(query));
+  currentPage = 1;
+  if (query.trim() === '') {
+    renderGames(games);
+  } else {
+    renderGames(filteredGames);
+  }
+  searchBox.classList.remove('show');
+  searchInput.blur();
+}
+
 searchInput.addEventListener('input', () => {
   const query = searchInput.value.toLowerCase();
   const filteredGames = games.filter(game => game.title.toLowerCase().includes(query));
@@ -1011,6 +1018,15 @@ searchInput.addEventListener('input', () => {
     renderGames(filteredGames);
   }
 });
+
+searchButton.addEventListener('click', executeSearch);
+
+searchInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    executeSearch();
+  }
+});
+
 
 </script>
 </body>
