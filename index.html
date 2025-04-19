@@ -960,10 +960,19 @@ function observeTopGames() {
   topGameCards.forEach(card => observer.observe(card));
 }
 
-observeTopGames();
+// 11. أول تحميل للمحتوى حسب البحث
+window.addEventListener('DOMContentLoaded', () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const query = urlParams.get('search');
 
-// 11. أول تحميل للمحتوى
-renderGames();
+  if (query) {
+    searchInput.value = query;
+    const filteredGames = games.filter(game => game.title.toLowerCase().includes(query.toLowerCase()));
+    renderGames(filteredGames);
+  } else {
+    renderGames(games);
+  }
+});
 
 // 12. إعداد تأثير العودة للأعلى
 window.addEventListener('scroll', () => {
@@ -994,38 +1003,26 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// 14. البحث الحي مع زر بحث
-function executeSearch() {
-  const query = searchInput.value.toLowerCase();
-  const filteredGames = games.filter(game => game.title.toLowerCase().includes(query));
-  currentPage = 1;
-  if (query.trim() === '') {
-    renderGames(games);
-  } else {
-    renderGames(filteredGames);
-  }
-  searchBox.classList.remove('show');
-  searchInput.blur();
-}
-
-searchInput.addEventListener('input', () => {
-  const query = searchInput.value.toLowerCase();
-  const filteredGames = games.filter(game => game.title.toLowerCase().includes(query));
-  currentPage = 1;
-  if (query.trim() === '') {
-    renderGames(games);
-  } else {
-    renderGames(filteredGames);
-  }
-});
-
-searchButton.addEventListener('click', executeSearch);
-
+// 14. تشغيل البحث عند الضغط على Enter
 searchInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') {
-    executeSearch();
+    e.preventDefault();
+    const query = searchInput.value.trim();
+    if (query !== '') {
+      window.location.search = `?search=${encodeURIComponent(query)}`;
+    }
   }
 });
+
+// 15. تشغيل البحث عند الضغط على زر البحث
+if (searchButton) {
+  searchButton.addEventListener('click', () => {
+    const query = searchInput.value.trim();
+    if (query !== '') {
+      window.location.search = `?search=${encodeURIComponent(query)}`;
+    }
+  });
+}
 
 
 </script>
